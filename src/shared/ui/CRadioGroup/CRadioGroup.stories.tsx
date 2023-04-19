@@ -16,7 +16,7 @@ const options = [
   'Lowest price',
 ]
 
-export const Default = () => {
+export function Default() {
   const [value, setValue] = useState(options[0])
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -24,10 +24,10 @@ export const Default = () => {
   }
 
   return (
-    <CRadioGroup
-      currentValue={value}
-      onChange={onChange}
-      options={options}
-    />
+      <CRadioGroup
+          currentValue={value}
+          onChange={onChange}
+          options={options}
+      />
   )
 }

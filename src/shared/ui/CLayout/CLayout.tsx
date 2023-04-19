@@ -4,12 +4,14 @@ import { CFooter } from '../CFooter'
 
 export function CLayout({ children }: { children: React.ReactNode }) {
   return (
-    <>
-      <CHeader />
+      <>
+          <CHeader />
 
-      <div className='pt-[70px]'>{children}</div>
+          <div className='pt-[70px]'>
+              {children}
+          </div>
 
-      <CFooter />
-    </>
+          <CFooter />
+      </>
   )
 }

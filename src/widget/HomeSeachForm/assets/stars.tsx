@@ -1,4 +1,5 @@
-export const Stars = () => {
+/* eslint-disable max-len */
+export function Stars() {
   return (
       <div className="flex items-center">
           <svg

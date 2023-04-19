@@ -11,8 +11,8 @@ export default meta
 
 export function Default() {
   return (
-    <CLayout>
-      123
-    </CLayout>
+      <CLayout>
+          123
+      </CLayout>
   )
 }
