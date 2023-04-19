@@ -1,0 +1,3 @@
+export {
+  CFooter,
+} from './CFooter'

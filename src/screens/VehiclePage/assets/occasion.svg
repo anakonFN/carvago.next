@@ -1,0 +1,11 @@
+<svg class="SVGInline-svg" style="width: 16px;height: 16px;" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="0.5" y="2.5" width="4" height="2" rx="0.5" stroke="#485885" stroke-linecap="round" stroke-linejoin="round"></rect>
+<rect x="11.5" y="2.5" width="4" height="2" rx="0.5" stroke="#485885" stroke-linecap="round" stroke-linejoin="round"></rect>
+<rect x="0.5" y="12.5" width="4" height="2" rx="0.5" stroke="#485885" stroke-linecap="round" stroke-linejoin="round"></rect>
+<rect x="11.5" y="12.5" width="4" height="2" rx="0.5" stroke="#485885" stroke-linecap="round" stroke-linejoin="round"></rect>
+<path d="M13.5 12.5V4.5" stroke="#485885" stroke-linecap="round" stroke-linejoin="round"></path>
+<path d="M2.5 12.5V4.5" stroke="#485885" stroke-linecap="round" stroke-linejoin="round"></path>
+<path d="M13.5 8.5H2.5" stroke="#485885" stroke-linecap="round" stroke-linejoin="round"></path>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M2.5 10C3.32843 10 4 9.32843 4 8.5C4 7.67157 3.32843 7 2.5 7C1.67157 7 1 7.67157 1 8.5C1 9.32843 1.67157 10 2.5 10Z" fill="#485885"></path>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M13.5 10C14.3284 10 15 9.32843 15 8.5C15 7.67157 14.3284 7 13.5 7C12.6716 7 12 7.67157 12 8.5C12 9.32843 12.6716 10 13.5 10Z" fill="#485885"></path>
+</svg>
