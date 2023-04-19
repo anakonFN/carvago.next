@@ -39,7 +39,7 @@ export function CSelect<T extends Option>({
           )}
           >
               <p className="text-blue-600">
-                  {/* //@ts-expect-error */}
+                  {/* @ts-expect-error */}
                   {value <= 0 ? 'To' : value}
               </p>
 
