@@ -41,6 +41,7 @@ export function CCarousel({ images, variant }: Props) {
                           alt={i}
                           className="block h-full w-full object-cover"
                           height={0}
+                          priority
                           sizes="100%"
                           src={i}
                           width={0}
