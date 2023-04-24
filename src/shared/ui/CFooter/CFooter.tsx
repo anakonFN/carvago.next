@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import Image from 'next/image'
 
 import { CButton } from '../CButton'
@@ -177,12 +178,12 @@ export function CFooter() {
                   "
               >
                   <div className="flex items-center gap-2 sd:gap-4">
-                      {paymants.map((paymant) => {
+                      {paymants.map((paymant, id) => {
                         return (
                             <Image
                                 alt={paymant}
                                 height={24}
-                                key={paymant}
+                                key={id}
                                 src={paymant}
                             />
                         )
@@ -190,10 +191,10 @@ export function CFooter() {
                   </div>
 
                   <div className="flex items-center gap-8">
-                      {socials.map((social) => {
+                      {socials.map((social, id) => {
                         return (
                             <CButton
-                                key={social}
+                                key={id}
                                 variant="link"
                             >
                                 <Image
