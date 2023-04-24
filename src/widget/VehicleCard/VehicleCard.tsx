@@ -216,6 +216,7 @@ export function VehicleCard({ car, ...props }: Props) {
                               <div className="ml-0.5 flex gap-1">
                                   <Image
                                       alt="hangar"
+                                      className="h-4 w-4"
                                       src={hangar}
                                   />
 
