@@ -1,12 +1,22 @@
 /* eslint-disable max-len */
 import Head from 'next/head'
 
+import { useQuery } from '@tanstack/react-query'
+
 import { HomeSearchForm } from '@/widget/HomeSeachForm'
 
 import { CAdvantages } from '@/shared/ui/CAdvantages'
 import { CLayout } from '@/shared/ui/CLayout'
 
 export function HomePage() {
+  const { data } = useQuery({
+    queryKey: ['categories'],
+    queryFn: async () => {
+      const data = await fetch('https://developers.ria.com/auto/categories/?api_key=OPwZPrUVHfTeBKgJuwMMA83lTtsxViyWUyE9Ljr5')
+      return data.json()
+    },
+  })
+
   return (
       <>
           <Head>
@@ -19,12 +29,12 @@ export function HomePage() {
               <div className="pb-16 sd:pb-0 md:pb-16">
                   <div
                       className="
-                  relative z-10 block h-[50rem]
-                  bg-[url('https://carvago.com/images/B2C-homepage/hero.webp')]
-                  bg-cover
-                  bg-center bg-no-repeat
-                  p-0 sm:h-[40rem]
-                  "
+                      relative z-10 block h-[50rem]
+                      bg-[url('https://carvago.com/images/B2C-homepage/hero.webp')]
+                      bg-cover
+                      bg-center bg-no-repeat
+                      p-0 sm:h-[40rem]
+                      "
                   >
                       <div className="relative h-full">
                           <div className="relative top-11 z-10 mx-auto flex max-w-[1230px] flex-col px-4">
