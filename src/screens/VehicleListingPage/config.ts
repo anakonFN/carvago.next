@@ -73,7 +73,6 @@ export const cars: car[] = [
       'https://bidfax.info/uploads/posts/2023-01/05/mclaren-automotive-720s-2019-sbm14dca7kw003067-img6.jpg',
       'https://bidfax.info/uploads/posts/2023-01/05/mclaren-automotive-720s-2019-sbm14dca7kw003067-img7.jpg',
       'https://bidfax.info/uploads/posts/2023-01/05/mclaren-automotive-720s-2019-sbm14dca7kw003067-img8.jpg',
-      'https://bidfax.info/uploads/posts/2023-01/05/mclaren-automotive-720s-2019-sbm14dca7kw003067-img8.jpg',
       'https://bidfax.info/uploads/posts/2023-01/05/mclaren-automotive-720s-2019-sbm14dca7kw003067-img9.jpg',
       'https://bidfax.info/uploads/posts/2023-01/05/mclaren-automotive-720s-2019-sbm14dca7kw003067-img10.jpg',
     ],
