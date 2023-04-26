@@ -1,22 +1,12 @@
 /* eslint-disable max-len */
 import Head from 'next/head'
 
-import { useQuery } from '@tanstack/react-query'
-
 import { HomeSearchForm } from '@/widget/HomeSeachForm'
 
 import { CAdvantages } from '@/shared/ui/CAdvantages'
 import { CLayout } from '@/shared/ui/CLayout'
 
 export function HomePage() {
-  const { data } = useQuery({
-    queryKey: ['categories'],
-    queryFn: async () => {
-      const data = await fetch('https://developers.ria.com/auto/categories/?api_key=OPwZPrUVHfTeBKgJuwMMA83lTtsxViyWUyE9Ljr5')
-      return data.json()
-    },
-  })
-
   return (
       <>
           <Head>
