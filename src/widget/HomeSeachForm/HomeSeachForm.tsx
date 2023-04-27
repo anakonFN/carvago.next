@@ -1,31 +1,37 @@
+import Link from 'next/link'
+
 import { ChevronRightIcon } from '@heroicons/react/20/solid'
 
 import { CAutocomplete } from '@/shared/ui/CAutocomplete'
 import { CCheckbox } from '@/shared/ui/CCheckbox'
 import { CButton } from '@/shared/ui/CButton'
 
+import { useMarks, useModels } from '@/shared/api/parameters'
+
 import { Stars } from './assets/stars'
 
 import {
-  type Option,
-  carBrands, mileage,
+  type Option, mileage,
   price,
   registerDate,
 } from './config'
-import Link from 'next/link'
 
 export function HomeSearchForm() {
-  const [selectedBrand, setSelectedBrand]
-   = useState<Option>({ value: 0, label: '' })
+  const { data: marks } = useMarks()
+
+  const [selectedMark, setSelectedMark]
+   = useState<Option>({ value: 0, name: '' })
   const [selectedModel, setSelectedModel]
-   = useState<Option>({ value: 0, label: '' })
+   = useState<Option>({ value: 0, name: '' })
   const [selectedMileage, setSelectedMileage]
-   = useState<Option>({ value: 0, label: '' })
+   = useState<Option>({ value: 0, name: '' })
   const [selectedRegisterDate, setSelectedRegisterDate]
-   = useState<Option>({ value: 0, label: '' })
+   = useState<Option>({ value: 0, name: '' })
   const [selectedPrice, setSelectedPrice]
-   = useState<Option>({ value: 0, label: '' })
+   = useState<Option>({ value: 0, name: '' })
   const [vat, setVat] = useState(false)
+
+  const { data: models } = useModels(selectedMark.value)
 
   return (
       <div className="w-full md:max-w-xl">
@@ -49,49 +55,44 @@ export function HomeSearchForm() {
                       "
                   >
                       <CAutocomplete
-                          itemsList={carBrands}
-                          // @ts-expect-error
-                          label={selectedBrand}
-                          onChange={setSelectedBrand}
+                          itemsList={marks ?? []}
+                          onChange={setSelectedMark}
                           openByClick
                           placeholder="Make"
+                          value={selectedMark}
                       />
 
                       <CAutocomplete
-                          disabled={selectedBrand.label.length === 0}
-                          itemsList={carBrands}
-                          // @ts-expect-error
-                          label={selectedModel}
+                          disabled={selectedMark.name.length === 0}
+                          itemsList={models ?? []}
                           onChange={setSelectedModel}
                           openByClick
                           placeholder="Model"
+                          value={selectedModel}
                       />
 
                       <CAutocomplete
                           itemsList={mileage}
-                          // @ts-expect-error
-                          label={selectedMileage}
                           onChange={setSelectedMileage}
                           openByClick
                           placeholder="Mileage"
+                          value={selectedMileage}
                       />
 
                       <CAutocomplete
                           itemsList={registerDate}
-                          // @ts-expect-error
-                          label={selectedRegisterDate}
                           onChange={setSelectedRegisterDate}
                           openByClick
                           placeholder="Registration from"
+                          value={selectedRegisterDate}
                       />
 
                       <CAutocomplete
                           itemsList={price}
-                          // @ts-expect-error
-                          label={selectedPrice}
                           onChange={setSelectedPrice}
                           openByClick
                           placeholder="Price"
+                          value={selectedPrice}
                       />
 
                       <CCheckbox
