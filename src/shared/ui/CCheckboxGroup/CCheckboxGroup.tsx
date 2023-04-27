@@ -4,30 +4,37 @@ import { Float } from '@headlessui-float/react'
 
 import { ChevronDownIcon } from '@heroicons/react/24/outline'
 
+interface Option {
+  name: string
+  value: number
+}
+
 export interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
-  values: string[]
-  options: string[]
-  mainOptions: string[]
+  values: number[]
+  options: Option[]
+  mainOptions: Option[]
 }
 
 export function CCheckboxGroup({
   values, options, mainOptions, ...props
 }: Props) {
+  const isChecked = (option: number) => values.includes(option)
+
   return (
       <div className="flex">
           {mainOptions.map((option) => {
             return (
                 <div
                     className="max-w-[12rem]"
-                    key={option}
+                    key={option.value}
                 >
                     <input
-                        checked={values.includes(option)}
+                        checked={isChecked(option.value)}
                         className="peer hidden"
-                        id={option}
+                        id={option.name}
                         name="checkbox-group"
                         type="checkbox"
-                        value={option}
+                        value={option.value}
                         {...props}
                     />
 
@@ -40,12 +47,12 @@ export function CCheckboxGroup({
                             'transition-all',
                             'hover:border-blue-400',
                           ],
-                          values.includes(option)
+                          isChecked(option.value)
                           && 'border-blue-300 bg-blue-100/75',
                           option === mainOptions[0]
                           && ['rounded-l-md border-r-0'],
                         )}
-                        htmlFor={option}
+                        htmlFor={option.name}
                     >
                         <div
                             className={
@@ -54,13 +61,13 @@ export function CCheckboxGroup({
                                   'w-full select-none font-semibold',
                                   'text-center text-sm text-indigo-900/50',
                                 ],
-                                values.includes(option)
+                                isChecked(option.value)
                                 && 'text-indigo-900/100',
                               )
                             }
 
                         >
-                            {option}
+                            {option.name}
                         </div>
                     </label>
                 </div>
@@ -98,16 +105,16 @@ export function CCheckboxGroup({
                                 flex flex-auto items-center px-3
                                 py-2 hover:bg-slate-100
                                 "
-                                key={option}
+                                key={option.value}
                             >
                                 <input
-                                    checked={values.includes(option)}
+                                    checked={isChecked(option.value)}
                                     className="border border-indigo-600
                                     p-2 focus:[box-shadow:none]"
-                                    id={option}
+                                    id={option.name}
                                     name="checkbox-group"
                                     type="checkbox"
-                                    value={option}
+                                    value={option.value}
                                     {...props}
                                 />
 
@@ -115,9 +122,9 @@ export function CCheckboxGroup({
                                     className="
                                     ml-5 w-full select-none font-light
                                     "
-                                    htmlFor={option}
+                                    htmlFor={option.name}
                                 >
-                                    {option}
+                                    {option.name}
                                 </label>
                             </div>
                         )
