@@ -10,11 +10,25 @@ const meta: Meta<CCheckboxGroupProps> = {
 export default meta
 
 export const Default: Story = () => {
-  const options: string[] = ['Manual', 'Automatic', 'Semi-automatic']
-  const [values, setValues] = useState<string[]>([])
+  const options = [
+    {
+      name: 'Передній',
+      value: 1,
+    },
+    {
+      name: 'Задній',
+      value: 2,
+    },
+    {
+      name: 'Повний',
+      value: 3,
+    },
+  ]
+
+  const [values, setValues] = useState<number[]>([])
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { target: { value } } = e
+    const value = parseInt(e.target.value)
     if (values.includes(value)) {
       const filteredValues = values.filter((item) => {
         return item !== value
@@ -49,7 +63,7 @@ export const Default: Story = () => {
           </div>
 
           <CCheckboxGroup
-              mainOptions={['Manual', 'Automatic']}
+              mainOptions={options.slice(0, 2) ?? []}
               onChange={onChange}
               options={options}
               values={values}
