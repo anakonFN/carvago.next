@@ -5,7 +5,7 @@ import {
 } from '@heroicons/react/24/outline'
 
 import {
-  ExclamationCircleIcon, PlusCircleIcon,
+  ExclamationCircleIcon,
 } from '@heroicons/react/24/solid'
 
 import { CButton } from '@/shared/ui/CButton'
@@ -14,13 +14,13 @@ import { CCheckbox } from '@/shared/ui/CCheckbox'
 import { CCheckboxGroup } from '@/shared/ui/CCheckboxGroup'
 import { CColorPicker } from '@/shared/ui/CColorPicker'
 
+import { useMarks, useModels } from '@/shared/api/parameters'
+
 import {
   colors,
   features,
   fuels,
-  kmsDriven,
   price,
-  registerDate,
   transmissins,
 } from './config'
 
@@ -38,12 +38,16 @@ export function SearchForm({
   carNumber,
   ...props
 }: Props) {
-  const [minPrice, setMinPrice] = useState({ value: 0, label: '' })
-  const [maxPrice, setMaxPrice] = useState({ value: 0, label: '' })
-  const [minRegisterDate, setMinRegisterDate]
-  = useState([0])
-  const [maxRegisterDate, setMaxRegisterDate]
-  = useState([0])
+  const { data: marks } = useMarks()
+
+  const [selectedMark, setSelectedMark] = useState({ value: 0, name: '' })
+  const [selectedModel, setSelectedModel] = useState({ value: 0, name: '' })
+  const [minPrice, setMinPrice] = useState({ value: 0, name: '' })
+  const [maxPrice, setMaxPrice] = useState({ value: 0, name: '' })
+  // const [minRegisterDate, setMinRegisterDate]
+  // = useState([0])
+  // const [maxRegisterDate, setMaxRegisterDate]
+  // = useState([0])
   const [minKmsDriven, setMinKmsDriven]
   = useState([0])
   const [maxKmsDriven, setMaxKmsDriven]
@@ -52,6 +56,8 @@ export function SearchForm({
   = useState<string[]>([])
   const [selectedFuels, setSelectedFuels] = useState<string[]>([])
   const [selectedColors, setSelecetedColors] = useState<string[]>([])
+
+  const { data: models } = useModels(selectedMark.value)
 
   const onChangeTransmission = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { target: { value } } = e
@@ -165,34 +171,31 @@ export function SearchForm({
               />
 
               <div>
-                  <div className="text-sm font-semibold text-slate-700">
-                      MAKE AND MODEL
-                  </div>
+                  <div className='mb-4'>
+                      <div className="text-sm font-semibold text-slate-700">
+                          MARK AND MODEL
+                      </div>
 
-                  <CButton
-                      classes="border w-full rounded-lg p-2 my-6"
-                      variant="border"
-                  >
-                      <div className="flex flex-1 items-center justify-between">
-                          <div className="flex items-center gap-1">
-                              <PlusCircleIcon
-                                  className="
-                                  h-5 w-5 text-indigo-600
-                                  "
-                              />
-
-                              <span className="text-slate-400">
-                                  Add a car
-                              </span>
-                          </div>
-
-                          <ChevronRightIcon
-                              className="
-                              h-5 w-5 text-indigo-600
-                              "
+                      <div className='mb-2'>
+                          <CAutocomplete
+                              itemsList={marks ?? []}
+                              onChange={setSelectedMark}
+                              placeholder='Make'
+                              value={selectedMark}
                           />
                       </div>
-                  </CButton>
+
+                      <div>
+
+                          <CAutocomplete
+                              disabled={selectedMark.name.length === 0}
+                              itemsList={models ?? []}
+                              onChange={setSelectedModel}
+                              placeholder='Model'
+                              value={selectedModel}
+                          />
+                      </div>
+                  </div>
 
                   <div className="text-sm font-semibold text-slate-700">
                       PRICE VAT INCL. (EUR)
@@ -201,20 +204,18 @@ export function SearchForm({
                   <div className="flex">
                       <CAutocomplete
                           itemsList={price}
-                          // @ts-expect-error
-                          label={minPrice}
                           onChange={setMinPrice}
                           placeholder="From"
                           rounededSide="left"
+                          value={minPrice}
                       />
 
                       <CAutocomplete
                           itemsList={price}
-                          // @ts-expect-error
-                          label={maxPrice}
                           onChange={setMaxPrice}
                           placeholder="To"
                           rounededSide="right"
+                          value={maxPrice}
                       />
                   </div>
 
@@ -246,7 +247,7 @@ export function SearchForm({
                       </CCheckbox>
                   </div>
 
-                  <div>
+                  {/* <div>
                       <div
                           className="
                           mb-1 mt-5 text-sm font-semibold text-slate-700
@@ -258,28 +259,26 @@ export function SearchForm({
                       <div className="flex">
 
                           <CAutocomplete
-                              itemsList={[{ value: 0, label: 'From' },
+                              itemsList={[{ value: 0, name: 'From' },
                                 ...registerDate]}
-                              // @ts-expect-error
-                              label={minRegisterDate}
                               onChange={setMinRegisterDate}
                               placeholder="From"
                               rounededSide="left"
+                              value={minRegisterDate}
                           />
 
                           <CAutocomplete
-                              itemsList={[{ value: 0, label: 'To' },
+                              itemsList={[{ value: 0, name: 'To' },
                                 ...registerDate]}
-                              // @ts-expect-error
-                              label={maxRegisterDate}
                               onChange={setMaxRegisterDate}
                               placeholder="To"
                               rounededSide="right"
+                              value={maxRegisterDate}
                           />
                       </div>
-                  </div>
+                  </div> */}
 
-                  <div>
+                  {/* <div>
                       <div
                           className="
                           mb-1 mt-5 text-sm font-semibold text-slate-700
@@ -292,23 +291,21 @@ export function SearchForm({
 
                           <CAutocomplete
                               itemsList={kmsDriven}
-                              // @ts-expect-error
-                              label={minKmsDriven}
                               onChange={setMinKmsDriven}
                               placeholder="From"
                               rounededSide="left"
+                              value={minKmsDriven}
                           />
 
                           <CAutocomplete
                               itemsList={kmsDriven}
-                              // @ts-expect-error
-                              label={maxKmsDriven}
                               onChange={setMaxKmsDriven}
                               placeholder="To"
                               rounededSide="right"
+                              value={maxKmsDriven}
                           />
                       </div>
-                  </div>
+                  </div> */}
 
                   <div>
                       <div className="flex items-end justify-between">
