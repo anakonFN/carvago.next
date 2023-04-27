@@ -12,12 +12,12 @@ export default meta
 
 const kmsDriven: {
   value: number
-  label: string
+  name: string
 }[] = [
-  { value: 0, label: 'Any' },
-  { value: 1, label: '2500' },
-  { value: 2, label: '5000' },
-  { value: 3, label: '10000' },
+  { value: 0, name: 'Any' },
+  { value: 1, name: '2500' },
+  { value: 2, name: '5000' },
+  { value: 3, name: '10000' },
 
 ]
 

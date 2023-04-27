@@ -3,8 +3,8 @@ import { ChevronDownIcon } from '@heroicons/react/24/outline'
 import { Combobox, Transition } from '@headlessui/react'
 
 interface Option {
+  name: string
   value: number
-  label: string
 }
 
 type ExtractProps<T> = T extends React.ComponentType<infer P> ? P : T
@@ -15,7 +15,7 @@ export type Props<T extends Option> = ComboboxProps & {
   itemsList: T[]
   value: T
   placeholder: string
-  rounededSide: 'left' | 'right'
+  rounededSide?: 'left' | 'right'
   openByClick?: boolean
 }
 
@@ -27,11 +27,11 @@ export function CAutocomplete<T extends Option>({
   ...props
 }: Props<T>) {
   const [query, setQuery] = useState('')
-  const filteredPeople
+  const filteredItems
   = query === ''
     ? itemsList
     : itemsList.filter(item =>
-      item.label
+      item.name
         .toLowerCase()
         .replace(/\s+/g, '')
         .includes(query.toLowerCase().replace(/\s+/g, '')),
@@ -56,7 +56,7 @@ export function CAutocomplete<T extends Option>({
                     rounededSide === 'left' && 'rounded-r-none',
                     rounededSide === 'right' && 'rounded-l-none',
                   )}
-                  displayValue={(person: T) => person.label}
+                  displayValue={(person: T) => person.name}
                   onChange={event => setQuery(event.target.value)}
                   placeholder={placeholder}
               />
@@ -92,7 +92,7 @@ export function CAutocomplete<T extends Option>({
                       ring-black/5 focus:outline-none sm:text-sm
                       "
                   >
-                      {(filteredPeople.length === 0 && query !== '')
+                      {(filteredItems.length === 0 && query !== '')
                         ? (
                             <div
                                 className="
@@ -104,7 +104,7 @@ export function CAutocomplete<T extends Option>({
                             </div>
                           )
                         : (
-                            filteredPeople.map(person => (
+                            filteredItems.map(item => (
                                 <Combobox.Option
                                     className={
                                         ({ active }) =>
@@ -115,8 +115,8 @@ export function CAutocomplete<T extends Option>({
                                         : 'text-gray-900'
                                         }`
                                         }
-                                    key={person.label}
-                                    value={person}
+                                    key={item.name}
+                                    value={item}
                                 >
                                     {({ selected }) => (
                                         <span
@@ -129,11 +129,12 @@ export function CAutocomplete<T extends Option>({
                                             }`
                                             }
                                         >
-                                            {person.label}
+                                            {item.name}
                                         </span>
                                     )}
                                 </Combobox.Option>
-                            ))
+                            ),
+                            )
                           )}
 
                   </Combobox.Options>
