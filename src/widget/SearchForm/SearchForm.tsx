@@ -14,7 +14,12 @@ import { CCheckbox } from '@/shared/ui/CCheckbox'
 import { CCheckboxGroup } from '@/shared/ui/CCheckboxGroup'
 import { CColorPicker } from '@/shared/ui/CColorPicker'
 
-import { useMarks, useModels } from '@/shared/api/parameters'
+import {
+  useCities,
+  useMarks,
+  useModels,
+  useRegions,
+} from '@/shared/api/parameters'
 
 import {
   colors,
@@ -39,25 +44,29 @@ export function SearchForm({
   ...props
 }: Props) {
   const { data: marks } = useMarks()
+  const { data: regions } = useRegions()
 
   const [selectedMark, setSelectedMark] = useState({ value: 0, name: '' })
   const [selectedModel, setSelectedModel] = useState({ value: 0, name: '' })
   const [minPrice, setMinPrice] = useState({ value: 0, name: '' })
   const [maxPrice, setMaxPrice] = useState({ value: 0, name: '' })
+  const [selectedRegion, setSelectedRegion] = useState({ value: 0, name: '' })
+  const [selectedCity, setSelectedCity] = useState({ value: 0, name: '' })
   // const [minRegisterDate, setMinRegisterDate]
   // = useState([0])
   // const [maxRegisterDate, setMaxRegisterDate]
   // = useState([0])
-  const [minKmsDriven, setMinKmsDriven]
-  = useState([0])
-  const [maxKmsDriven, setMaxKmsDriven]
-  = useState([0])
+  // const [minKmsDriven, setMinKmsDriven]
+  // = useState([0])
+  // const [maxKmsDriven, setMaxKmsDriven]
+  // = useState([0])
   const [selectedTransmissions, setSelectedTransmissions]
   = useState<string[]>([])
   const [selectedFuels, setSelectedFuels] = useState<string[]>([])
   const [selectedColors, setSelecetedColors] = useState<string[]>([])
 
   const { data: models } = useModels(selectedMark.value)
+  const { data: cities } = useCities(selectedRegion.value)
 
   const onChangeTransmission = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { target: { value } } = e
@@ -217,6 +226,32 @@ export function SearchForm({
                           rounededSide="right"
                           value={maxPrice}
                       />
+                  </div>
+
+                  <div className='my-4'>
+                      <div className="text-sm font-semibold text-slate-700">
+                          REGION AND CITY
+                      </div>
+
+                      <div className='mb-2'>
+                          <CAutocomplete
+                              itemsList={regions ?? []}
+                              onChange={setSelectedRegion}
+                              placeholder='Region'
+                              value={selectedRegion}
+                          />
+                      </div>
+
+                      <div>
+
+                          <CAutocomplete
+                              disabled={selectedRegion.name.length === 0}
+                              itemsList={cities ?? []}
+                              onChange={setSelectedCity}
+                              placeholder='City'
+                              value={selectedCity}
+                          />
+                      </div>
                   </div>
 
                   <div className="my-4 rounded-md bg-slate-100 px-2 py-3">

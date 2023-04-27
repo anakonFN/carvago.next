@@ -27,3 +27,21 @@ export function useModels(markId: number | undefined) {
         .then(r => r.json()))
   }, { enabled: !!markId })
 }
+
+export function useRegions() {
+  return useQuery(['regions'], async () => {
+    return z.array(paramsAPI)
+      .parse(await fetch(`${BASE_URL}/api/states`)
+        .then(r => r.json()))
+  })
+}
+
+export function useCities(regionId: number | undefined) {
+  return useQuery(['regions', regionId, 'cities'], async () => {
+    if (regionId === undefined)
+      throw new Error('region is undefined')
+    return z.array(paramsAPI)
+      .parse(await fetch(`${BASE_URL}/api/states/${regionId}/cities`)
+        .then(r => r.json()))
+  }, { enabled: !!regionId })
+}
