@@ -45,3 +45,11 @@ export function useCities(regionId: number | undefined) {
         .then(r => r.json()))
   }, { enabled: !!regionId })
 }
+
+export function useDriverType() {
+  return useQuery(['driverType'], async () => {
+    return z.array(paramsAPI)
+      .parse(await fetch(`${BASE_URL}/api/categories/1/driverTypes`)
+        .then(r => r.json()))
+  })
+}

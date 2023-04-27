@@ -16,6 +16,7 @@ import { CColorPicker } from '@/shared/ui/CColorPicker'
 
 import {
   useCities,
+  useDriverType,
   useMarks,
   useModels,
   useRegions,
@@ -24,9 +25,7 @@ import {
 import {
   colors,
   features,
-  fuels,
   price,
-  transmissins,
 } from './config'
 
 interface Props extends React.BaseHTMLAttributes<HTMLDivElement> {
@@ -45,6 +44,7 @@ export function SearchForm({
 }: Props) {
   const { data: marks } = useMarks()
   const { data: regions } = useRegions()
+  const { data: driverTypes } = useDriverType()
 
   const [selectedMark, setSelectedMark] = useState({ value: 0, name: '' })
   const [selectedModel, setSelectedModel] = useState({ value: 0, name: '' })
@@ -52,6 +52,8 @@ export function SearchForm({
   const [maxPrice, setMaxPrice] = useState({ value: 0, name: '' })
   const [selectedRegion, setSelectedRegion] = useState({ value: 0, name: '' })
   const [selectedCity, setSelectedCity] = useState({ value: 0, name: '' })
+  const [selectedTransmissions, setSelectedTransmissions]
+  = useState<number[]>([])
   // const [minRegisterDate, setMinRegisterDate]
   // = useState([0])
   // const [maxRegisterDate, setMaxRegisterDate]
@@ -60,16 +62,15 @@ export function SearchForm({
   // = useState([0])
   // const [maxKmsDriven, setMaxKmsDriven]
   // = useState([0])
-  const [selectedTransmissions, setSelectedTransmissions]
-  = useState<string[]>([])
-  const [selectedFuels, setSelectedFuels] = useState<string[]>([])
+
+  // const [selectedFuels, setSelectedFuels] = useState<string[]>([])
   const [selectedColors, setSelecetedColors] = useState<string[]>([])
 
   const { data: models } = useModels(selectedMark.value)
   const { data: cities } = useCities(selectedRegion.value)
 
   const onChangeTransmission = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { target: { value } } = e
+    const value = parseInt(e.target.value)
     if (selectedTransmissions.includes(value)) {
       const filteredValues = selectedTransmissions.filter((item) => {
         return item !== value
@@ -78,16 +79,16 @@ export function SearchForm({
     }
     else { setSelectedTransmissions([...selectedTransmissions, value]) }
   }
-  const onChangeFuels = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { target: { value } } = e
-    if (selectedFuels.includes(value)) {
-      const filteredValues = selectedFuels.filter((item) => {
-        return item !== value
-      })
-      setSelectedFuels([...filteredValues])
-    }
-    else { setSelectedFuels([...selectedFuels, value]) }
-  }
+  // const onChangeFuels = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const { target: { value } } = e
+  //   if (selectedFuels.includes(value)) {
+  //     const filteredValues = selectedFuels.filter((item) => {
+  //       return item !== value
+  //     })
+  //     setSelectedFuels([...filteredValues])
+  //   }
+  //   else { setSelectedFuels([...selectedFuels, value]) }
+  // }
   const onChangeColor = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { target: { value } } = e
     if (selectedColors.includes(value)) {
@@ -282,6 +283,35 @@ export function SearchForm({
                       </CCheckbox>
                   </div>
 
+                  <div className='mb-4'>
+                      <div className="flex items-end justify-between">
+                          <div
+                              className="
+                              mb-1 mt-5 text-sm font-semibold text-slate-700
+                              "
+                          >
+                              DRIVER TYPES
+                          </div>
+
+                          { selectedTransmissions.length >= 1
+                        && <div
+                            className="
+                            mb-1 h-6 w-6 rounded-full
+                            bg-blue-600 text-center font-semibold text-white
+                            "
+                           >
+                            {selectedTransmissions.length}
+                        </div>}
+                      </div>
+
+                      <CCheckboxGroup
+                          mainOptions={driverTypes?.slice(0, 2) ?? []}
+                          onChange={onChangeTransmission}
+                          options={driverTypes ?? []}
+                          values={selectedTransmissions}
+                      />
+                  </div>
+
                   {/* <div>
                       <div
                           className="
@@ -342,7 +372,7 @@ export function SearchForm({
                       </div>
                   </div> */}
 
-                  <div>
+                  {/* <div>
                       <div className="flex items-end justify-between">
                           <div
                               className="
@@ -369,9 +399,9 @@ export function SearchForm({
                           options={transmissins}
                           values={selectedTransmissions}
                       />
-                  </div>
+                  </div> */}
 
-                  <div className="mb-4">
+                  {/* <div className="mb-4">
                       <div className="flex items-end justify-between">
                           <div
                               className="
@@ -398,7 +428,7 @@ export function SearchForm({
                           options={fuels}
                           values={selectedFuels}
                       />
-                  </div>
+                  </div> */}
 
                   <div className="px-2">
                       <CCheckbox>
