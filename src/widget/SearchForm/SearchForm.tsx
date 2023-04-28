@@ -17,6 +17,7 @@ import { CColorPicker } from '@/shared/ui/CColorPicker'
 import {
   useCities,
   useDriverType,
+  useFuels,
   useMarks,
   useModels,
   useRegions,
@@ -45,6 +46,7 @@ export function SearchForm({
   const { data: marks } = useMarks()
   const { data: regions } = useRegions()
   const { data: driverTypes } = useDriverType()
+  const { data: fuels } = useFuels()
 
   const [selectedMark, setSelectedMark] = useState({ value: 0, name: '' })
   const [selectedModel, setSelectedModel] = useState({ value: 0, name: '' })
@@ -54,16 +56,8 @@ export function SearchForm({
   const [selectedCity, setSelectedCity] = useState({ value: 0, name: '' })
   const [selectedTransmissions, setSelectedTransmissions]
   = useState<number[]>([])
-  // const [minRegisterDate, setMinRegisterDate]
-  // = useState([0])
-  // const [maxRegisterDate, setMaxRegisterDate]
-  // = useState([0])
-  // const [minKmsDriven, setMinKmsDriven]
-  // = useState([0])
-  // const [maxKmsDriven, setMaxKmsDriven]
-  // = useState([0])
-
-  // const [selectedFuels, setSelectedFuels] = useState<string[]>([])
+  const [selectedFuels, setSelectedFuels]
+  = useState<number[]>([])
   const [selectedColors, setSelecetedColors] = useState<string[]>([])
 
   const { data: models } = useModels(selectedMark.value)
@@ -79,16 +73,16 @@ export function SearchForm({
     }
     else { setSelectedTransmissions([...selectedTransmissions, value]) }
   }
-  // const onChangeFuels = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   const { target: { value } } = e
-  //   if (selectedFuels.includes(value)) {
-  //     const filteredValues = selectedFuels.filter((item) => {
-  //       return item !== value
-  //     })
-  //     setSelectedFuels([...filteredValues])
-  //   }
-  //   else { setSelectedFuels([...selectedFuels, value]) }
-  // }
+  const onChangeFuels = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = parseInt(e.target.value)
+    if (selectedFuels.includes(value)) {
+      const filteredValues = selectedFuels.filter((item) => {
+        return item !== value
+      })
+      setSelectedFuels([...filteredValues])
+    }
+    else { setSelectedFuels([...selectedFuels, value]) }
+  }
   const onChangeColor = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { target: { value } } = e
     if (selectedColors.includes(value)) {
@@ -312,103 +306,14 @@ export function SearchForm({
                       />
                   </div>
 
-                  {/* <div>
-                      <div
-                          className="
-                          mb-1 mt-5 text-sm font-semibold text-slate-700
-                          "
-                      >
-                          REGISTRATION FROM
-                      </div>
-
-                      <div className="flex">
-
-                          <CAutocomplete
-                              itemsList={[{ value: 0, name: 'From' },
-                                ...registerDate]}
-                              onChange={setMinRegisterDate}
-                              placeholder="From"
-                              rounededSide="left"
-                              value={minRegisterDate}
-                          />
-
-                          <CAutocomplete
-                              itemsList={[{ value: 0, name: 'To' },
-                                ...registerDate]}
-                              onChange={setMaxRegisterDate}
-                              placeholder="To"
-                              rounededSide="right"
-                              value={maxRegisterDate}
-                          />
-                      </div>
-                  </div> */}
-
-                  {/* <div>
-                      <div
-                          className="
-                          mb-1 mt-5 text-sm font-semibold text-slate-700
-                          "
-                      >
-                          KMS DRIVEN
-                      </div>
-
-                      <div className="flex">
-
-                          <CAutocomplete
-                              itemsList={kmsDriven}
-                              onChange={setMinKmsDriven}
-                              placeholder="From"
-                              rounededSide="left"
-                              value={minKmsDriven}
-                          />
-
-                          <CAutocomplete
-                              itemsList={kmsDriven}
-                              onChange={setMaxKmsDriven}
-                              placeholder="To"
-                              rounededSide="right"
-                              value={maxKmsDriven}
-                          />
-                      </div>
-                  </div> */}
-
-                  {/* <div>
+                  <div className='mb-4'>
                       <div className="flex items-end justify-between">
                           <div
                               className="
                               mb-1 mt-5 text-sm font-semibold text-slate-700
                               "
                           >
-                              TRANSMISSION
-                          </div>
-
-                          { selectedTransmissions.length >= 1
-                        && <div
-                            className="
-                            mb-1 h-6 w-6 rounded-full
-                            bg-blue-600 text-center font-semibold text-white
-                            "
-                           >
-                            {selectedTransmissions.length}
-                        </div>}
-                      </div>
-
-                      <CCheckboxGroup
-                          mainOptions={['Manual', 'Automatic']}
-                          onChange={onChangeTransmission}
-                          options={transmissins}
-                          values={selectedTransmissions}
-                      />
-                  </div> */}
-
-                  {/* <div className="mb-4">
-                      <div className="flex items-end justify-between">
-                          <div
-                              className="
-                              mb-1 mt-5 text-sm font-semibold text-slate-700
-                              "
-                          >
-                              FUEL
+                              FUELS
                           </div>
 
                           { selectedFuels.length >= 1
@@ -423,12 +328,12 @@ export function SearchForm({
                       </div>
 
                       <CCheckboxGroup
-                          mainOptions={['Diesel', 'Petrol']}
+                          mainOptions={fuels?.slice(0, 2) ?? []}
                           onChange={onChangeFuels}
-                          options={fuels}
+                          options={fuels ?? []}
                           values={selectedFuels}
                       />
-                  </div> */}
+                  </div>
 
                   <div className="px-2">
                       <CCheckbox>
