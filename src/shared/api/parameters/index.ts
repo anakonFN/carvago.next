@@ -2,7 +2,7 @@ import { z } from 'zod'
 import { useQuery } from '@tanstack/react-query'
 import { paramsAPI } from './types'
 
-const BASE_URL = 'http://localhost:5000'
+const BASE_URL = 'https://carvago-server.vercel.app'
 
 export function useCategories() {
   return useQuery(['categories'], () => {
