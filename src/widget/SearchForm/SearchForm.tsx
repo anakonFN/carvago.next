@@ -21,6 +21,7 @@ import {
   useMarks,
   useModels,
   useRegions,
+  useTransmissions,
 } from '@/shared/api/parameters'
 
 import {
@@ -47,6 +48,7 @@ export function SearchForm({
   const { data: regions } = useRegions()
   const { data: driverTypes } = useDriverType()
   const { data: fuels } = useFuels()
+  const { data: transmissions } = useTransmissions()
 
   const [selectedMark, setSelectedMark] = useState({ value: 0, name: '' })
   const [selectedModel, setSelectedModel] = useState({ value: 0, name: '' })
@@ -54,24 +56,26 @@ export function SearchForm({
   const [maxPrice, setMaxPrice] = useState({ value: 0, name: '' })
   const [selectedRegion, setSelectedRegion] = useState({ value: 0, name: '' })
   const [selectedCity, setSelectedCity] = useState({ value: 0, name: '' })
-  const [selectedTransmissions, setSelectedTransmissions]
+  const [selectedDriverTypes, setSelectedDriverTypes]
   = useState<number[]>([])
   const [selectedFuels, setSelectedFuels]
+  = useState<number[]>([])
+  const [selectedTransmissions, setSelectedTransmissions]
   = useState<number[]>([])
   const [selectedColors, setSelecetedColors] = useState<string[]>([])
 
   const { data: models } = useModels(selectedMark.value)
   const { data: cities } = useCities(selectedRegion.value)
 
-  const onChangeTransmission = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeDriverTypes = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseInt(e.target.value)
-    if (selectedTransmissions.includes(value)) {
-      const filteredValues = selectedTransmissions.filter((item) => {
+    if (selectedDriverTypes.includes(value)) {
+      const filteredValues = selectedDriverTypes.filter((item) => {
         return item !== value
       })
-      setSelectedTransmissions([...filteredValues])
+      setSelectedDriverTypes([...filteredValues])
     }
-    else { setSelectedTransmissions([...selectedTransmissions, value]) }
+    else { setSelectedDriverTypes([...selectedDriverTypes, value]) }
   }
   const onChangeFuels = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseInt(e.target.value)
@@ -82,6 +86,16 @@ export function SearchForm({
       setSelectedFuels([...filteredValues])
     }
     else { setSelectedFuels([...selectedFuels, value]) }
+  }
+  const onChangeTransmission = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = parseInt(e.target.value)
+    if (selectedTransmissions.includes(value)) {
+      const filteredValues = selectedTransmissions.filter((item) => {
+        return item !== value
+      })
+      setSelectedTransmissions([...filteredValues])
+    }
+    else { setSelectedTransmissions([...selectedTransmissions, value]) }
   }
   const onChangeColor = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { target: { value } } = e
@@ -287,22 +301,22 @@ export function SearchForm({
                               DRIVER TYPES
                           </div>
 
-                          { selectedTransmissions.length >= 1
+                          { selectedDriverTypes.length >= 1
                         && <div
                             className="
                             mb-1 h-6 w-6 rounded-full
                             bg-blue-600 text-center font-semibold text-white
                             "
                            >
-                            {selectedTransmissions.length}
+                            {selectedDriverTypes.length}
                         </div>}
                       </div>
 
                       <CCheckboxGroup
                           mainOptions={driverTypes?.slice(0, 2) ?? []}
-                          onChange={onChangeTransmission}
+                          onChange={onChangeDriverTypes}
                           options={driverTypes ?? []}
-                          values={selectedTransmissions}
+                          values={selectedDriverTypes}
                       />
                   </div>
 
@@ -332,6 +346,35 @@ export function SearchForm({
                           onChange={onChangeFuels}
                           options={fuels ?? []}
                           values={selectedFuels}
+                      />
+                  </div>
+
+                  <div className='mb-4'>
+                      <div className="flex items-end justify-between">
+                          <div
+                              className="
+                              mb-1 mt-5 text-sm font-semibold text-slate-700
+                              "
+                          >
+                              TRANSMISSIONS
+                          </div>
+
+                          { selectedTransmissions.length >= 1
+                        && <div
+                            className="
+                            mb-1 h-6 w-6 rounded-full
+                            bg-blue-600 text-center font-semibold text-white
+                            "
+                           >
+                            {selectedTransmissions.length}
+                        </div>}
+                      </div>
+
+                      <CCheckboxGroup
+                          mainOptions={transmissions?.slice(1, 3) ?? []}
+                          onChange={onChangeTransmission}
+                          options={transmissions ?? []}
+                          values={selectedTransmissions}
                       />
                   </div>
 

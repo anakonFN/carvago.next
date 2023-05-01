@@ -61,3 +61,11 @@ export function useFuels() {
         .then(r => r.json()))
   })
 }
+
+export function useTransmissions() {
+  return useQuery(['transmissions', 'geatBoxes'], async () => {
+    return z.array(paramsAPI)
+      .parse(await fetch(`${BASE_URL}/api/categories/1/gearboxes`)
+        .then(r => r.json()))
+  })
+}
