@@ -3,8 +3,6 @@ import { useQuery } from '@tanstack/react-query'
 import { paramsAPI } from './types'
 
 const BASE_URL = 'https://carvago-server.vercel.app'
-const DEV_URL = 'https://developers.ria.com'
-const API_KEY = 'OPwZPrUVHfTeBKgJuwMMA83lTtsxViyWUyE9Ljr5'
 
 export function useCategories() {
   return useQuery(['categories'], () => {
@@ -59,7 +57,7 @@ export function useDriverType() {
 export function useFuels() {
   return useQuery(['fuels'], async () => {
     return z.array(paramsAPI)
-      .parse(await fetch(`${DEV_URL}/auto/type?api_key=${API_KEY}`)
+      .parse(await fetch(`${BASE_URL}/api/fuels`)
         .then(r => r.json()))
   })
 }
