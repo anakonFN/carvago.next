@@ -20,13 +20,13 @@ import {
   useFuels,
   useMarks,
   useModels,
+  useOptions,
   useRegions,
   useTransmissions,
 } from '@/shared/api/parameters'
 
 import {
   colors,
-  features,
   price,
 } from './config'
 
@@ -49,6 +49,7 @@ export function SearchForm({
   const { data: driverTypes } = useDriverType()
   const { data: fuels } = useFuels()
   const { data: transmissions } = useTransmissions()
+  const { data: options } = useOptions()
 
   const [selectedMark, setSelectedMark] = useState({ value: 0, name: '' })
   const [selectedModel, setSelectedModel] = useState({ value: 0, name: '' })
@@ -63,6 +64,7 @@ export function SearchForm({
   const [selectedTransmissions, setSelectedTransmissions]
   = useState<number[]>([])
   const [selectedColors, setSelecetedColors] = useState<string[]>([])
+  const [selectedOptions, setSelectedOptions] = useState<number[]>([])
 
   const { data: models } = useModels(selectedMark.value)
   const { data: cities } = useCities(selectedRegion.value)
@@ -106,6 +108,16 @@ export function SearchForm({
       setSelecetedColors([...filteredValues])
     }
     else { setSelecetedColors([...selectedColors, value]) }
+  }
+  const onChangeOptions = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = Number(e.target.value)
+    if (selectedOptions.includes(value)) {
+      const filteredValues = selectedOptions.filter((item) => {
+        return item !== value
+      })
+      setSelectedOptions([...filteredValues])
+    }
+    else { setSelectedOptions([...selectedOptions, value]) }
   }
 
   useEffect(() => {
@@ -406,13 +418,21 @@ export function SearchForm({
                           mb-1 mt-5 text-sm font-semibold text-slate-700
                           "
                       >
-                          FEATURES
+                          OPTIONS
                       </div>
 
                       <div className="flex flex-col gap-2 px-2 text-sm">
-                          {features.map(feature => (
-                              <CCheckbox key={feature}>
-                                  {feature}
+                          {options?.slice(0, 10).map(option => (
+                              <CCheckbox
+                                  checked={
+                                    selectedOptions
+                                      .includes(option.value)
+                                  }
+                                  key={option.value}
+                                  onChange={onChangeOptions}
+                                  value={option.value}
+                              >
+                                  {option.name}
                               </CCheckbox>
                           ))}
                       </div>

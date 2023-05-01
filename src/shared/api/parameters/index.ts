@@ -69,3 +69,11 @@ export function useTransmissions() {
         .then(r => r.json()))
   })
 }
+
+export function useOptions() {
+  return useQuery(['options'], async () => {
+    return z.array(paramsAPI)
+      .parse(await fetch(`${BASE_URL}/api/categories/1/options`)
+        .then(r => r.json()))
+  })
+}
