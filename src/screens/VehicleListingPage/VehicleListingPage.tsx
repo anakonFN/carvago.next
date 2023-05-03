@@ -28,8 +28,21 @@ export function VehicleListingPage() {
 
   const { data: cars } = useVehicles(correctPage, 20)
 
-  if (cars?.length === undefined)
-    return
+  if (cars?.length === undefined) {
+    return (
+        <CLayout>
+            <Head>
+                <title>
+                    Carvago | cars
+                </title>
+            </Head>
+
+            <div className='my-48 text-center font-bold'>
+                NOT FOUND CARS
+            </div>
+        </CLayout>
+    )
+  }
 
   const totalPages = cars.length
 
