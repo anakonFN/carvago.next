@@ -1,3 +1,5 @@
+import Image from 'next/image'
+
 import {
   CalendarDaysIcon,
   CalendarIcon,
@@ -12,42 +14,25 @@ import {
   StarIcon,
 } from '@heroicons/react/24/solid'
 
-import { CCarousel } from '@/shared/ui/CCarousel'
 import { CButton } from '@/shared/ui/CButton'
+import type { vehcileAPI } from '@/shared/api/vehicles/types'
+import { CCarousel } from '@/shared/ui/CCarousel'
 
 import road from './assets/road.svg'
 import motor from './assets/motor.svg'
 import gas from './assets/gas.svg'
 import hangar from './assets/hangar.svg'
 import occasion from './assets/occasion.svg'
-import Image from 'next/image'
 
 export interface Props extends React.BaseHTMLAttributes<HTMLDivElement> {
-  car: {
-    images: string[]
-    make: string
-    model: string
-    driven: number
-    registration: number
-    power: number
-    transmission: string
-    fuel: string
-    features: string[]
-    location: string
-    price: number
-    seller: {
-      name: string
-      rate: number
-    }
-    whenPutUp: number
-    allWheel?: boolean
-    consumption: number
-  }
+  car: vehcileAPI
 }
 
 export function VehicleCard({ car, ...props }: Props) {
-  const numbFmt = new Intl.NumberFormat('ru-RU').format(car.price)
-  const numbFmtVAT = new Intl.NumberFormat('ru-RU').format(car.price * 0.79)
+  const numbFmt = new Intl.NumberFormat('ru-RU')
+    .format(Math.trunc(car.uniform_price))
+  const numbFmtVAT = new Intl
+    .NumberFormat('ru-RU').format(Math.trunc(car.uniform_price))
 
   return (
       <div
@@ -79,18 +64,7 @@ export function VehicleCard({ car, ...props }: Props) {
                       group-hover:text-indigo-700
                       "
                   >
-                      {car.make}
-
-                      {' '}
-
-                      {car.model}
-
-                      {' '}
-
-                      {car.power * 0.74}
-
-                      {' '}
-                      kW
+                      {car.title}
                   </div>
 
                   <div
@@ -109,7 +83,7 @@ export function VehicleCard({ car, ...props }: Props) {
 
                           <div className="text-xs font-semibold">
 
-                              {`${car.driven}K`}
+                              {`${car.mileage}K`}
 
                               {' '}
 
@@ -121,7 +95,7 @@ export function VehicleCard({ car, ...props }: Props) {
                           <CalendarIcon className="h-4 w-4" />
 
                           <div className="text-xs font-semibold">
-                              {car.registration}
+                              {car.registration_date}
                           </div>
                       </div>
 
@@ -144,7 +118,7 @@ export function VehicleCard({ car, ...props }: Props) {
                           <Cog8ToothIcon className="h-4 w-4" />
 
                           <div className="text-xs font-semibold">
-                              {car.transmission}
+                              {car.transmission.name}
                           </div>
                       </div>
 
@@ -156,11 +130,11 @@ export function VehicleCard({ car, ...props }: Props) {
                           />
 
                           <div className="text-xs font-semibold">
-                              {car.fuel}
+                              {car.fuel_type.name}
                           </div>
                       </div>
 
-                      {car.allWheel
+                      {car.drive.name === '4X4'
                         ? (
                             <div className="flex items-center gap-2">
                                 <Image
@@ -178,7 +152,7 @@ export function VehicleCard({ car, ...props }: Props) {
                   </div>
 
                   <div className="mb-4 flex flex-wrap gap-2">
-                      {car.features.map((feature) => {
+                      {car.features.slice(1, 5).map((feature) => {
                         return (
                             <div
                                 className="
@@ -186,13 +160,13 @@ export function VehicleCard({ car, ...props }: Props) {
                                 rounded-md bg-blue-100 px-1 py-0.5
                                 text-sm text-blue-700
                                 "
-                                key={feature}
+                                key={feature.name}
                             >
                                 <CheckCircleIcon
                                     className="h-4 w-4"
                                 />
 
-                                {feature}
+                                {feature.name}
                             </div>
                         )
                       })}
@@ -226,7 +200,7 @@ export function VehicleCard({ car, ...props }: Props) {
                                       text-xs font-semibold
                                       "
                                   >
-                                      {car.seller.name}
+                                      {car.seller.type.name}
                                   </div>
                               </div>
 
@@ -244,7 +218,7 @@ export function VehicleCard({ car, ...props }: Props) {
                                       self-end text-xs font-bold
                                       "
                                   >
-                                      {car.seller.rate}
+                                      {car.seller.rating_average}
                                   </span>
                               </div>
                           </div>
@@ -253,7 +227,7 @@ export function VehicleCard({ car, ...props }: Props) {
                               <MapPinIcon className="h-5 w-5" />
 
                               <span className="self-end text-xs font-bold">
-                                  {car.location}
+                                  {car.location_country.name}
                               </span>
                           </div>
 
@@ -261,7 +235,7 @@ export function VehicleCard({ car, ...props }: Props) {
                               <CalendarDaysIcon className="h-5 w-5" />
 
                               <span className="self-end text-xs font-bold">
-                                  {car.whenPutUp}
+                                  {car.source_created_at}
                               </span>
                           </div>
                       </div>

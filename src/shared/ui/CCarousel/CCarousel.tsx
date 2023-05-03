@@ -10,7 +10,12 @@ import 'swiper/css/pagination'
 import { NavigateButtons } from './ui/NavigateButtons'
 
 export interface Props {
-  images: string[]
+  images: {
+    id: number
+    path: string
+    ordering: number
+    ordering_computed: number | null
+  }[]
   variant: 'small' | 'big'
 }
 
@@ -23,6 +28,7 @@ export function CCarousel({ images, variant }: Props) {
           onClick={(e) => { e.preventDefault() }}
       >
           <Swiper
+              className='h-44'
               loop
               modules={[Navigation, Pagination, A11y]}
               navigation
@@ -34,16 +40,16 @@ export function CCarousel({ images, variant }: Props) {
               {images.map(i => (
                   <SwiperSlide
                       className=""
-                      key={i}
+                      key={i.id}
                   >
 
                       <Image
-                          alt={i}
+                          alt={i.path}
                           className="block h-full w-full object-cover"
                           height={0}
                           priority
                           sizes="100%"
-                          src={i}
+                          src={i.path}
                           width={0}
                       />
 

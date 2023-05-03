@@ -13,17 +13,25 @@ import { VehicleCard } from '@/widget/VehicleCard'
 import { CButton } from '@/shared/ui/CButton'
 import { CLayout } from '@/shared/ui/CLayout'
 import { CRadioGroup } from '@/shared/ui/CRadioGroup'
+import { useVehicles } from '@/shared/api/vehicles'
 
-import { cars, options } from './config'
+import { options } from './config'
 
 export function VehicleListingPage() {
   const [selectedSort, setSelectedSort] = useState(options[0])
   const [correctPage, setCorrectPage] = useState(1)
-  const totalPages = cars.length
+  const [showSearchForm, setShowSearchForm] = useState(false)
 
   const onChangeSort = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedSort(e.target.value)
   }
+
+  const { data: cars } = useVehicles(correctPage, 20)
+
+  if (cars?.length === undefined)
+    return
+
+  const totalPages = cars.length
 
   const hasPrevPage = correctPage > 1
   const hasNextPage = correctPage < cars.length
@@ -36,8 +44,6 @@ export function VehicleListingPage() {
     if (hasNextPage)
       setCorrectPage(correctPage + 1)
   }
-
-  const [showSearchForm, setShowSearchForm] = useState(false)
 
   const openSearchForm = () => setShowSearchForm(true)
 
@@ -58,9 +64,9 @@ export function VehicleListingPage() {
               >
                   <div
                       className="
-                      ml-3 inline-flex items-center
-                      rounded-md bg-blue-700 px-2 py-1
-                      "
+                        ml-3 inline-flex items-center
+                        rounded-md bg-blue-700 px-2 py-1
+                        "
                       onClick={openSearchForm}
                   >
                       <AdjustmentsHorizontalIcon
@@ -76,10 +82,10 @@ export function VehicleListingPage() {
 
               <div
                   className={
-                  `fixed right-0 top-0 z-30 
-                  ${showSearchForm ? 'translate-x-0' : 'translate-x-full'}
-                  transition-all duration-300 ease-in`
-          }
+                `fixed right-0 top-0 z-30 
+                ${showSearchForm ? 'translate-x-0' : 'translate-x-full'}
+                transition-all duration-300 ease-in`
+        }
               >
                   {showSearchForm
                     ? <SearchForm
@@ -95,8 +101,8 @@ export function VehicleListingPage() {
                   <div className="bg-slate-100 py-5">
                       <div
                           className="
-                          mx-auto flex justify-center md:max-w-[1222px]
-                          "
+                            mx-auto flex justify-center md:max-w-[1222px]
+                            "
                       >
 
                           <div className="hidden min-[1300px]:block">
@@ -106,9 +112,9 @@ export function VehicleListingPage() {
                           <div className="px-1 md:pr-0 lg:pl-8">
                               <div
                                   className="
-                                  mb-8 flex items-end
-                                  gap-5 text-slate-700
-                                  "
+                                    mb-8 flex items-end
+                                    gap-5 text-slate-700
+                                    "
                               >
                                   <div className="text-3xl font-extrabold">
                                       Verified cars
@@ -127,8 +133,8 @@ export function VehicleListingPage() {
 
                               <div
                                   className="
-                                  flex items-center justify-between
-                                  "
+                                    flex items-center justify-between
+                                    "
                               >
                                   <div className="my-5">
                                       <CRadioGroup
@@ -140,17 +146,17 @@ export function VehicleListingPage() {
 
                                   <div
                                       className="
-                                      hidden items-center gap-2 sd:flex
-                                      "
+                                        hidden items-center gap-2 sd:flex
+                                        "
                                   >
                                       <CButton
                                           classes="
-                                          h-8 px-1 disabled:opacity-50
-                                          hover:shadow-md
-                                          hover:shadow-blue-700/50
-                                          transition duration-200
-                                          disabled:shadow-none
-                                          "
+                                            h-8 px-1 disabled:opacity-50
+                                            hover:shadow-md
+                                            hover:shadow-blue-700/50
+                                            transition duration-200
+                                            disabled:shadow-none
+                                            "
                                           disabled={!hasPrevPage}
                                           onClick={hanlerPrevPage}
                                           variant='primary'
@@ -176,12 +182,12 @@ export function VehicleListingPage() {
 
                                       <CButton
                                           classes="
-                                          h-8 px-1 disabled:opacity-50
-                                          hover:shadow-md
-                                          hover:shadow-blue-700/30
-                                          transition duration-200
-                                          disabled:shadow-none
-                                          "
+                                            h-8 px-1 disabled:opacity-50
+                                            hover:shadow-md
+                                            hover:shadow-blue-700/30
+                                            transition duration-200
+                                            disabled:shadow-none
+                                            "
                                           disabled={!hasNextPage}
                                           onClick={hanlerNextPage}
                                           variant='primary'
@@ -195,17 +201,17 @@ export function VehicleListingPage() {
 
                               <div
                                   className="
-                                  flex flex-col gap-3
-                                  px-2 sd:flex-row sd:gap-4 md:flex-col md:px-0
-                                  "
+                                    flex flex-col gap-3
+                                    px-2 sd:flex-row sd:gap-4
+                                    md:flex-col md:px-0
+                                    "
                               >
                                   {cars.map((car) => {
                                     return (
                                         <Link
                                             className="sd:flex sd:w-full"
                                             href={`/car/${car.id}`}
-                                            key={`${car.make}${car.model}
-                                            ${car.registration}`}
+                                            key={car.id}
                                         >
                                             <VehicleCard
                                                 car={car}
