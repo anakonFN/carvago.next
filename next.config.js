@@ -2,7 +2,10 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['bidfax.info'],
+    domains: [
+      'bidfax.info',
+      'storage.prod.alpha-analytics.dev',
+    ],
   },
   webpack: (config) => {
     config.plugins.push(
