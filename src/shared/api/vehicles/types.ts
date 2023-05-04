@@ -7,7 +7,7 @@ export const vehcileAPI = z.object({
   vin: z.string().nullable(),
   hot: z.boolean(),
   user: z.null(),
-  cubic_capacity: z.number(),
+  cubic_capacity: z.number().nullable(),
   power: z.number(),
   number_of_seats: z.number(),
   features: z.array(
@@ -109,7 +109,11 @@ export const vehcileAPI = z.object({
     name: z.string(),
   }).nullable(),
   rear_spoiler: z.null(),
-  sliding_doors: z.null(),
+  sliding_doors: z.object({
+    id: z.string(),
+    const_key: z.string(),
+    name: z.string(),
+  }).nullable(),
   spare_tyre: z.object({
     id: z.string(),
     const_key: z.string(),
@@ -117,7 +121,11 @@ export const vehcileAPI = z.object({
   }).nullable(),
   sunroof: z.null(),
   tailgate_opening: z.null(),
-  trailer_coupling: z.null(),
+  trailer_coupling: z.object({
+    id: z.string(),
+    const_key: z.string(),
+    name: z.string(),
+  }).nullable(),
   number_of_cylinders: z.null(),
   model_edition: z.object({
     model_family: z.object({
