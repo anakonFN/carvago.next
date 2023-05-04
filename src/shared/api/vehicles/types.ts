@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-export const vehcileAPI = z.object({
+export const vehicleAPI = z.object({
   id: z.string(),
   slug: z.string(),
   title: z.string(),
@@ -310,4 +310,4 @@ export const vehcileAPI = z.object({
   power_hp: z.number(),
 })
 
-export type vehcileAPI = z.infer<typeof vehcileAPI>
+export type vehicleAPI = z.infer<typeof vehicleAPI>
