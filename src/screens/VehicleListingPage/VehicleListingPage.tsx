@@ -26,7 +26,23 @@ export function VehicleListingPage() {
     setSelectedSort(e.target.value)
   }
 
-  const { data: cars } = useVehicles(correctPage, 20)
+  const { data: cars, isLoading } = useVehicles(correctPage, 20)
+
+  if (isLoading) {
+    return (
+        <CLayout>
+            <Head>
+                <title>
+                    Carvago | cars
+                </title>
+            </Head>
+
+            <div className='my-48 text-center font-bold'>
+                LOADING...
+            </div>
+        </CLayout>
+    )
+  }
 
   if (cars?.length === undefined) {
     return (
