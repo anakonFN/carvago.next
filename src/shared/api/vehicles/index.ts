@@ -2,7 +2,7 @@ import { z } from 'zod'
 import { useQuery } from '@tanstack/react-query'
 import { vehicleAPI } from './types'
 
-const BASE_URL = 'https://api.carvago.com'
+const BASE_URL = 'https://listedcars-server.vercel.app'
 
 export function useVehicles(page = 1, limit = 1) {
   return useQuery(['vehicles'], async () => {
