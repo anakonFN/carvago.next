@@ -31,7 +31,7 @@ export function CCarousel({ images, variant }: Props) {
           <Swiper
               className={clsx(
                 variant === 'small' && ['h-44'],
-                'h-full bg-gray-200',
+                'h-full overflow-hidden bg-gray-200',
               )}
               loop
               modules={[Navigation, Pagination, A11y]}
@@ -52,6 +52,7 @@ export function CCarousel({ images, variant }: Props) {
                           className="block h-full w-full object-cover"
                           height={0}
                           priority
+                          sizes='100%'
                           src={i.path}
                           width={0}
                       />
