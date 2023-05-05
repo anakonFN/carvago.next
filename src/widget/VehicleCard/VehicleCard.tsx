@@ -15,7 +15,7 @@ import {
 } from '@heroicons/react/24/solid'
 
 import { CButton } from '@/shared/ui/CButton'
-import type { vehcileAPI } from '@/shared/api/vehicles/types'
+import type { vehicleAPI } from '@/shared/api/vehicles/types'
 import { CCarousel } from '@/shared/ui/CCarousel'
 
 import road from './assets/road.svg'
@@ -25,7 +25,7 @@ import hangar from './assets/hangar.svg'
 import occasion from './assets/occasion.svg'
 
 export interface Props extends React.BaseHTMLAttributes<HTMLDivElement> {
-  car: vehcileAPI
+  car: vehicleAPI
 }
 
 export function VehicleCard({ car, ...props }: Props) {
