@@ -34,7 +34,7 @@ import motor from './assets/motor.svg'
 import gas from './assets/gas.svg'
 
 interface Props {
-  carId: string
+  carId?: string
 }
 
 export function VehiclePage({ carId = '52849457' }: Props) {

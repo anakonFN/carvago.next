@@ -11,8 +11,6 @@ export default meta
 
 export function Default() {
   return (
-      <VehiclePage
-          id={1}
-      />
+      <VehiclePage />
   )
 }
