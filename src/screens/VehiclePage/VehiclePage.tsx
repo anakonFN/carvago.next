@@ -37,7 +37,7 @@ interface Props {
   carId?: string
 }
 
-export function VehiclePage({ carId = '52849457' }: Props) {
+export function VehiclePage({ carId = '54022280' }: Props) {
   const { data: car, isLoading } = useVehicle(carId)
   const [liked, setLiked] = useState(false)
 
@@ -109,8 +109,9 @@ export function VehiclePage({ carId = '52849457' }: Props) {
 
               <div
                   className="
-                  flex flex-col items-center gap-10 pb-10 md:flex-row
-                  md:items-start
+                  flex flex-col items-center gap-10
+                  pb-10 md:flex-row md:items-start
+                  md:justify-between
                   "
               >
                   <div className="flex flex-col justify-between">
@@ -141,7 +142,7 @@ export function VehiclePage({ carId = '52849457' }: Props) {
                           </div>
                       </div>
 
-                      <div className="group h-96 max-w-[640px]">
+                      <div className="group max-h-[640px]">
                           <CCarousel
                               images={car.images}
                               variant='big'

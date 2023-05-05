@@ -49,7 +49,7 @@ export function VehicleCard({ car, ...props }: Props) {
                 md:flex md:flex-row md:gap-4
                 "
           >
-              <div className="m-auto w-60">
+              <div className="m-auto h-44 w-60">
                   <CCarousel
                       images={car.images}
                       variant='small'

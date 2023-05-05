@@ -24,14 +24,14 @@ export function CCarousel({ images, variant }: Props) {
   return (
       <div
           className={clsx(
-            'relative overflow-hidden',
+            'relative  h-full overflow-hidden',
           )}
           onClick={(e) => { e.preventDefault() }}
       >
           <Swiper
               className={clsx(
                 variant === 'small' && ['h-44'],
-                'max-h-[430px]',
+                'h-full bg-gray-200',
               )}
               loop
               modules={[Navigation, Pagination, A11y]}
@@ -43,7 +43,7 @@ export function CCarousel({ images, variant }: Props) {
           >
               {images.map(i => (
                   <SwiperSlide
-                      className=""
+                      className="m-auto max-h-80 sd:max-h-96 md:max-h-[480px]"
                       key={i.id}
                   >
 
@@ -52,7 +52,6 @@ export function CCarousel({ images, variant }: Props) {
                           className="block h-full w-full object-cover"
                           height={0}
                           priority
-                          sizes="100%"
                           src={i.path}
                           width={0}
                       />
