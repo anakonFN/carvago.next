@@ -5,7 +5,6 @@ import { ChevronRightIcon } from '@heroicons/react/20/solid'
 import { CAutocomplete } from '@/shared/ui/CAutocomplete'
 import { CCheckbox } from '@/shared/ui/CCheckbox'
 import { CButton } from '@/shared/ui/CButton'
-
 import { useMarks, useModels } from '@/shared/api/parameters'
 
 import { Stars } from './assets/stars'
@@ -125,15 +124,14 @@ export function HomeSearchForm() {
                           <button
                               className="
                               w-full rounded bg-blue-700
-                              py-3 text-center font-bold text-white
-                              transition-all duration-200
-                              hover:shadow-lg hover:shadow-blue-700/30
-                              sd:w-auto
+                              px-20 py-3 text-center font-bold
+                              text-white transition-all
+                              duration-200 hover:shadow-lg
+                              hover:shadow-blue-700/30 sd:w-auto
                               sd:px-40 md:px-24
                               "
                           >
-                              0 Offers
-
+                              Go to offers
                           </button>
                       </Link>
                   </div>
