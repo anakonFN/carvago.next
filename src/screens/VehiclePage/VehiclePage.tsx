@@ -41,22 +41,6 @@ export function VehiclePage({ carId = '52849457' }: Props) {
   const { data: car, isLoading } = useVehicle(carId)
   const [liked, setLiked] = useState(false)
 
-  if (car === undefined) {
-    return (
-        <CLayout>
-            <Head>
-                <title>
-                    Carvago | cars
-                </title>
-            </Head>
-
-            <div className='my-48 text-center font-bold'>
-                NOT FOUND CAR
-            </div>
-        </CLayout>
-    )
-  }
-
   if (isLoading) {
     return (
         <CLayout>
@@ -68,6 +52,22 @@ export function VehiclePage({ carId = '52849457' }: Props) {
 
             <div className='my-48 text-center font-bold'>
                 LOADING...
+            </div>
+        </CLayout>
+    )
+  }
+
+  if (car === undefined) {
+    return (
+        <CLayout>
+            <Head>
+                <title>
+                    Carvago | cars
+                </title>
+            </Head>
+
+            <div className='my-48 text-center font-bold'>
+                NOT FOUND CAR
             </div>
         </CLayout>
     )
