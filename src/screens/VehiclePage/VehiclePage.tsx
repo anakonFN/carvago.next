@@ -1,3 +1,7 @@
+import Head from 'next/head'
+import Image from 'next/image'
+import Link from 'next/link'
+
 import {
   CalendarIcon,
   CheckCircleIcon,
@@ -16,11 +20,11 @@ import {
   StarIcon,
 } from '@heroicons/react/24/solid'
 
-import Link from 'next/link'
-
+import { useVehicle } from '@/shared/api/vehicle'
 import { CButton } from '@/shared/ui/CButton'
 import { CCarousel } from '@/shared/ui/CCarousel'
 import { CAdvantages } from '@/shared/ui/CAdvantages'
+import { CLayout } from '@/shared/ui/CLayout'
 
 import hangar from './assets/hangar.svg'
 import speedometer from './assets/speedometer.svg'
@@ -29,20 +33,50 @@ import road from './assets/road.svg'
 import motor from './assets/motor.svg'
 import gas from './assets/gas.svg'
 
-import { cars } from './config'
-import Image from 'next/image'
-import { CLayout } from '@/shared/ui/CLayout'
-import Head from 'next/head'
+interface Props {
+  carId: string
+}
 
-// interface Props {
-//   car: car
-// }
-
-export function VehiclePage({ id = 1 }: { id: number }) {
-  const car = cars.find(car => +id === car.id)!
-  const numbFmt = new Intl.NumberFormat('ru-RU').format(car.price)
-  const numbFmtVAT = new Intl.NumberFormat('ru-RU').format(car.price * 0.79)
+export function VehiclePage({ carId = '52849457' }: Props) {
+  const { data: car, isLoading } = useVehicle(carId)
   const [liked, setLiked] = useState(false)
+
+  if (car === undefined) {
+    return (
+        <CLayout>
+            <Head>
+                <title>
+                    Carvago | cars
+                </title>
+            </Head>
+
+            <div className='my-48 text-center font-bold'>
+                NOT FOUND CAR
+            </div>
+        </CLayout>
+    )
+  }
+
+  if (isLoading) {
+    return (
+        <CLayout>
+            <Head>
+                <title>
+                    Carvago | car
+                </title>
+            </Head>
+
+            <div className='my-48 text-center font-bold'>
+                LOADING...
+            </div>
+        </CLayout>
+    )
+  }
+
+  const numbFmt = new Intl.NumberFormat('ru-RU')
+    .format(Math.trunc(car.uniform_price))
+  const numbFmtVAT = new Intl
+    .NumberFormat('ru-RU').format(Math.trunc(car.uniform_price))
 
   return (
       <CLayout>
@@ -51,7 +85,7 @@ export function VehiclePage({ id = 1 }: { id: number }) {
                   Carvago |
                   {' '}
 
-                  {`${car.make} ${car.model}`}
+                  {car.title}
               </title>
           </Head>
 
@@ -76,27 +110,17 @@ export function VehiclePage({ id = 1 }: { id: number }) {
               <div
                   className="
                   flex flex-col items-center gap-10 pb-10 md:flex-row
+                  md:items-start
                   "
               >
                   <div className="flex flex-col justify-between">
                       <div>
                           <p className="mb-5 text-3xl font-bold text-slate-700">
-                              {car.make}
-
-                              {' '}
-
-                              {car.model}
-
-                              {' '}
-
-                              {Math.trunc(car.power * 0.74)}
-
-                              {' '}
-                              kW
+                              {car.title}
                           </p>
 
                           <div className="mb-2 flex max-w-2xl flex-wrap gap-2">
-                              {car.features.map((feature) => {
+                              {car.features.slice(1, 12).map((feature) => {
                                 return (
                                     <div
                                         className="
@@ -104,20 +128,20 @@ export function VehiclePage({ id = 1 }: { id: number }) {
                                         rounded-md bg-blue-100 px-1 py-0.5
                                         text-sm text-blue-700
                                         "
-                                        key={feature}
+                                        key={feature.name}
                                     >
                                         <CheckCircleIcon
                                             className="h-4 w-4"
                                         />
 
-                                        {feature}
+                                        {feature.name}
                                     </div>
                                 )
                               })}
                           </div>
                       </div>
 
-                      <div className="group max-w-[640px]">
+                      <div className="group h-96 max-w-[640px]">
                           <CCarousel
                               images={car.images}
                               variant='big'
@@ -262,7 +286,7 @@ export function VehiclePage({ id = 1 }: { id: number }) {
                               <div>
                                   <div>
 
-                                      {car.seller.name}
+                                      {car.seller.type.name}
                                   </div>
 
                                   <div className="flex items-center gap-1">
@@ -273,12 +297,15 @@ export function VehiclePage({ id = 1 }: { id: number }) {
                                       {' '}
 
                                       <span className="text-sm font-bold">
-                                          {car.seller.rate}
+                                          {car.seller.rating_average}
                                       </span>
 
                                       <span className="ml-2 text-xs">
                                           (
-                                          {Math.trunc(car.seller.rate)}
+                                          {Math
+                                            .trunc(Number(car
+                                              .seller.rating_average),
+                                            )}
 
                                           {' '}
                                           ratings)
@@ -302,7 +329,7 @@ export function VehiclePage({ id = 1 }: { id: number }) {
                               </div>
 
                               <div className="text-sm font-semibold">
-                                  {car.location}
+                                  {car.location_country.name}
                               </div>
                           </div>
                       </div>
@@ -332,7 +359,7 @@ export function VehiclePage({ id = 1 }: { id: number }) {
                               </div>
 
                               <div className="text-sm font-semibold">
-                                  {car.driven}
+                                  {car.mileage}
                               </div>
                           </div>
 
@@ -351,7 +378,7 @@ export function VehiclePage({ id = 1 }: { id: number }) {
                               </div>
 
                               <div className="text-sm font-semibold">
-                                  {car.registration}
+                                  {car.registration_date}
                               </div>
                           </div>
 
@@ -370,7 +397,7 @@ export function VehiclePage({ id = 1 }: { id: number }) {
                               </div>
 
                               <div className="text-sm font-semibold">
-                                  {car.transmission}
+                                  {car.transmission.name}
                               </div>
                           </div>
 
@@ -427,7 +454,7 @@ export function VehiclePage({ id = 1 }: { id: number }) {
                               </div>
 
                               <div className="text-sm font-semibold">
-                                  {car.fuel}
+                                  {car.fuel_type.name}
                               </div>
                           </div>
 
@@ -450,7 +477,7 @@ export function VehiclePage({ id = 1 }: { id: number }) {
                               </div>
 
                               <div className="text-sm font-semibold">
-                                  {car.consumption}
+                                  {car.fuel_consumption_combined}
                                   l
                                   /100km
                               </div>
@@ -475,17 +502,7 @@ export function VehiclePage({ id = 1 }: { id: number }) {
                               </div>
 
                               <div className="text-sm font-semibold">
-                                  {car.allWheel === false
-                                    ? (
-                                        <div>
-                                            4x2
-                                        </div>
-                                      )
-                                    : (
-                                        <div>
-                                            4x4
-                                        </div>
-                                      )}
+                                  {car.drive.name}
                               </div>
                           </div>
                       </div>

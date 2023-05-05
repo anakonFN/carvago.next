@@ -8,10 +8,14 @@ export default function VehicleDetailsPage() {
 
   return (
       <div>
-          <VehiclePage
+          {
+           id
+             ? <VehiclePage
               // @ts-expect-error
-              id={id}
-          />
+                     carId={id}
+               />
+             : null
+                 }
       </div>
   )
 }

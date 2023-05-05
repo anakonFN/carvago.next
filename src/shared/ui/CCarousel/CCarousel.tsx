@@ -14,7 +14,8 @@ export interface Props {
     id: number
     path: string
     ordering: number
-    ordering_computed: number | null
+    ordering_computed?: number | null
+    variants?: undefined[] | null
   }[]
   variant: 'small' | 'big'
 }
@@ -28,7 +29,10 @@ export function CCarousel({ images, variant }: Props) {
           onClick={(e) => { e.preventDefault() }}
       >
           <Swiper
-              className='h-44'
+              className={clsx(
+                variant === 'small' && ['h-44'],
+                'max-h-[430px]',
+              )}
               loop
               modules={[Navigation, Pagination, A11y]}
               navigation
