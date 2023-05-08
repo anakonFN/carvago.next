@@ -48,6 +48,7 @@ export function CHeader() {
                     <ul
                         className="bg-white pt-10"
                     >
+
                         <li className="px-10 pb-6">
 
                             <Link href="/cars">
@@ -158,7 +159,7 @@ export function CHeader() {
 
           <header
               className="
-              fixed top-0 z-30 flex h-[70px]
+              fixed top-0 z-[200] flex h-[70px]
               w-full items-center border-b bg-white
               "
           >
