@@ -135,8 +135,8 @@ export function SearchForm({
             ? (
                 <div
                     className="
-                    sticky z-50 flex items-center justify-between
-                    bg-white p-[30px] shadow-xl
+                    sticky top-16 z-50 flex items-center
+                    justify-between bg-white p-[30px] shadow-xl
                     "
                 >
                     <div className="flex gap-2">
@@ -173,8 +173,7 @@ export function SearchForm({
 
                         {' '}
                         offers
-                    </div
-                    >
+                    </div>
                 </div>
               )
             : null}

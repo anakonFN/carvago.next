@@ -93,7 +93,10 @@ export function VehicleListingPage() {
 
   const openSearchForm = () => setShowSearchForm(true)
 
-  const closeSearchForm = () => setShowSearchForm(false)
+  const closeSearchForm = () => {
+    setShowSearchForm(false)
+    document.body.style.overflow = 'auto'
+  }
 
   return (
       <CLayout>
@@ -184,9 +187,10 @@ export function VehicleListingPage() {
 
                               <div
                                   className="
-                                    flex flex-col gap-3
-                                    px-2 sd:flex-row sd:gap-4
-                                    md:flex-col md:px-0
+                                    grid-cols-2 flex-col gap-3
+                                    px-2 sm:grid
+                                    sd:flex-row sd:gap-4
+                                    md:flex md:flex-col md:px-0
                                     "
                               >
                                   {cars.map((car) => {
