@@ -8,5 +8,5 @@ export function useVehicle(carId: string) {
     return vehicleAPI
       .parse(await fetch(`${BASE_URL}/api/listedcars/${carId}`)
         .then(r => r.json()))
-  }, { keepPreviousData: true })
+  }, { keepPreviousData: false })
 }

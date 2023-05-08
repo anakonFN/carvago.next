@@ -165,16 +165,6 @@ export function VehicleListingPage() {
                                   <div className="text-3xl font-extrabold">
                                       Verified cars
                                   </div>
-
-                                  <div>
-                                      <strong>
-                                          {cars.length}
-                                      </strong>
-
-                                      {' '}
-
-                                      {cars.length > 1 ? 'results' : 'result'}
-                                  </div>
                               </div>
 
                               <div

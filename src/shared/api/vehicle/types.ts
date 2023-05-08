@@ -264,7 +264,6 @@ export const vehicleAPI = z.object({
       id: z.number(),
       path: z.string(),
       ordering: z.number(),
-      variants: z.array(z.undefined()).nullable(),
     }),
   ),
   // main_image: z.string(),
