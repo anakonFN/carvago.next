@@ -10,7 +10,6 @@ import Link from 'next/link'
 import { SearchForm } from '@/widget/SearchForm'
 import { VehicleCard } from '@/widget/VehicleCard'
 
-import { CButton } from '@/shared/ui/CButton'
 import { CLayout } from '@/shared/ui/CLayout'
 import { CRadioGroup } from '@/shared/ui/CRadioGroup'
 import { useVehicles } from '@/shared/api/vehicles'
@@ -26,9 +25,29 @@ export function VehicleListingPage() {
     setSelectedSort(e.target.value)
   }
 
-  const { data: cars, isLoading } = useVehicles(correctPage, 20)
+  const { data: cars, isLoading, isFetching } = useVehicles(correctPage, 20)
+
+  useEffect(() => {
+
+  }, [correctPage])
 
   if (isLoading) {
+    return (
+        <CLayout>
+            <Head>
+                <title>
+                    Carvago | cars
+                </title>
+            </Head>
+
+            <div className='my-48 text-center font-bold'>
+                LOADING...
+            </div>
+        </CLayout>
+    )
+  }
+
+  if (isFetching) {
     return (
         <CLayout>
             <Head>
@@ -59,8 +78,6 @@ export function VehicleListingPage() {
         </CLayout>
     )
   }
-
-  const totalPages = cars.length
 
   const hasPrevPage = correctPage > 1
   const hasNextPage = correctPage < cars.length
@@ -173,59 +190,6 @@ export function VehicleListingPage() {
                                       />
                                   </div>
 
-                                  <div
-                                      className="
-                                        hidden items-center gap-2 sd:flex
-                                        "
-                                  >
-                                      <CButton
-                                          classes="
-                                            h-8 px-1 disabled:opacity-50
-                                            hover:shadow-md
-                                            hover:shadow-blue-700/50
-                                            transition duration-200
-                                            disabled:shadow-none
-                                            "
-                                          disabled={!hasPrevPage}
-                                          onClick={hanlerPrevPage}
-                                          variant='primary'
-                                      >
-                                          <ChevronLeftIcon
-                                              className="h-4 w-4 text-white"
-                                          />
-                                      </CButton>
-
-                                      <div className="flex gap-1">
-                                          <p>
-                                              {correctPage}
-                                          </p>
-
-                                          <p>
-                                              /
-                                          </p>
-
-                                          <p>
-                                              {totalPages}
-                                          </p>
-                                      </div>
-
-                                      <CButton
-                                          classes="
-                                            h-8 px-1 disabled:opacity-50
-                                            hover:shadow-md
-                                            hover:shadow-blue-700/30
-                                            transition duration-200
-                                            disabled:shadow-none
-                                            "
-                                          disabled={!hasNextPage}
-                                          onClick={hanlerNextPage}
-                                          variant='primary'
-                                      >
-                                          <ChevronRightIcon
-                                              className="h-4 w-4 text-white"
-                                          />
-                                      </CButton>
-                                  </div>
                               </div>
 
                               <div
@@ -248,6 +212,54 @@ export function VehicleListingPage() {
                                         </Link>
                                     )
                                   })}
+                              </div>
+
+                              <div
+                                  className="
+                                  mt-8 flex justify-evenly
+                                  "
+                              >
+                                  <button
+                                      className="
+                                      flex h-8 items-center
+                                      rounded-lg border
+                                      border-blue-800 px-1 text-blue-800
+                                      transition duration-200
+                                      hover:shadow-md
+                                      hover:shadow-blue-700/50
+                                      disabled:opacity-60
+                                      disabled:shadow-none
+                                      "
+                                      disabled={!hasPrevPage}
+                                      onClick={hanlerPrevPage}
+                                  >
+
+                                      <ChevronLeftIcon
+                                          className="h-4 w-4"
+                                      />
+                                      PREVIOUS
+                                  </button>
+
+                                  <button
+                                      className="
+                                      flex h-8 items-center
+                                      rounded-lg border
+                                      border-blue-800 px-1 text-blue-800
+                                      transition duration-200
+                                      hover:shadow-md
+                                      hover:shadow-blue-700/50
+                                      disabled:opacity-60
+                                      disabled:shadow-none
+                                      "
+                                      disabled={!hasNextPage}
+                                      onClick={hanlerNextPage}
+                                  >
+                                      NEXT
+                                      <ChevronRightIcon
+                                          className="h-4 w-4"
+                                      />
+                                  </button>
+
                               </div>
 
                           </div>
