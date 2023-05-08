@@ -10,5 +10,5 @@ export function useVehicles(page = 1, limit = 1) {
       .parse(await fetch(
         `${BASE_URL}/api/listedcars?page=${page}&limit=${limit}`,
       ).then(r => r.json()))
-  })
+  }, { refetchOnWindowFocus: false })
 }
