@@ -25,9 +25,9 @@ export function CAdvantages({ ...props }: Props) {
                       && 'border-y-2 md:border-x-2 md:border-y-0',
                       advantage.position === 'right'
                       && 'rounded-b-xl md:rounded-l-none md:rounded-r-xl',
-                      'group relative z-50 px-8 py-4 ',
+                      'group relative z-50 px-8 py-4',
                       'flex justify-between bg-slate-100',
-                      'transition-colors hover:bg-slate-50 md:block',
+                      'transition-colors md:block md:hover:bg-slate-50',
                       'min-w-[33%] duration-300 md:pb-10 md:pt-8',
                     )}
                     key={advantage.title}
@@ -67,7 +67,7 @@ export function CAdvantages({ ...props }: Props) {
                         className="
                         absolute bottom-3 right-3 flex
                         items-center gap-4 text-2xl opacity-0 transition-opacity
-                        duration-300 group-hover:opacity-100
+                        duration-300 md:group-hover:opacity-100
                         "
                     >
                         <div className="text-sm font-semibold text-blue-800">
