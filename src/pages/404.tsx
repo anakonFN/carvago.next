@@ -21,7 +21,7 @@ export default function NotFoundPage() {
               size='sm'
               variant='primary'
           >
-              <Link href="/cars">
+              <Link href="/">
                   Go back
               </Link>
           </CButton>
