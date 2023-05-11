@@ -6,6 +6,7 @@ import {
 
 import Head from 'next/head'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 import { SearchForm } from '@/widget/SearchForm'
 import { VehicleCard } from '@/widget/VehicleCard'
@@ -17,19 +18,30 @@ import { useVehicles } from '@/shared/api/vehicles'
 import { options } from './config'
 
 export function VehicleListingPage() {
+  const router = useRouter()
+
+  const page = Number(router.query.page)
+
+  const nextPage = () => {
+    void router.push(`/cars?page=${page + 1}`)
+  }
+
+  const previousPage = () => {
+    void router.push(`/cars?page=${page - 1}`)
+  }
+
+  const firstPage = () => {
+    void router.push('/cars?page=1')
+  }
+
   const [selectedSort, setSelectedSort] = useState(options[0])
-  const [correctPage, setCorrectPage] = useState(1)
   const [showSearchForm, setShowSearchForm] = useState(false)
 
   const onChangeSort = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedSort(e.target.value)
   }
 
-  const { data: cars, isLoading, isFetching } = useVehicles(correctPage, 20)
-
-  useEffect(() => {
-
-  }, [correctPage])
+  const { data: cars, isLoading, isFetching } = useVehicles(page, 10)
 
   if (isLoading) {
     return (
@@ -77,18 +89,6 @@ export function VehicleListingPage() {
             </div>
         </CLayout>
     )
-  }
-
-  const hasPrevPage = correctPage > 1
-  const hasNextPage = correctPage < cars.length
-
-  const hanlerPrevPage = () => {
-    if (hasPrevPage)
-      setCorrectPage(correctPage - 1)
-  }
-  const hanlerNextPage = () => {
-    if (hasNextPage)
-      setCorrectPage(correctPage + 1)
   }
 
   const openSearchForm = () => setShowSearchForm(true)
@@ -210,12 +210,12 @@ export function VehicleListingPage() {
 
                               <div
                                   className="
-                                  mt-8 flex justify-evenly
-                                  "
+                                   mt-8 flex items-center justify-between
+                                   "
                               >
                                   <button
                                       className="
-                                      flex h-8 items-center
+                                      h-8 whitespace-nowrap
                                       rounded-lg border
                                       border-blue-800 px-1 text-blue-800
                                       transition duration-200
@@ -224,36 +224,57 @@ export function VehicleListingPage() {
                                       disabled:opacity-60
                                       disabled:shadow-none
                                       "
-                                      disabled={!hasPrevPage}
-                                      onClick={hanlerPrevPage}
+                                      disabled={page === 1}
+                                      onClick={firstPage}
                                   >
 
-                                      <ChevronLeftIcon
-                                          className="h-4 w-4"
-                                      />
-                                      PREVIOUS
+                                      FIRST PAGE
                                   </button>
 
-                                  <button
-                                      className="
-                                      flex h-8 items-center
-                                      rounded-lg border
-                                      border-blue-800 px-1 text-blue-800
-                                      transition duration-200
-                                      hover:shadow-md
-                                      hover:shadow-blue-700/50
-                                      disabled:opacity-60
-                                      disabled:shadow-none
-                                      "
-                                      disabled={!hasNextPage}
-                                      onClick={hanlerNextPage}
+                                  <div
+                                      className="flex w-full justify-evenly"
                                   >
-                                      NEXT
-                                      <ChevronRightIcon
-                                          className="h-4 w-4"
-                                      />
-                                  </button>
+                                      <button
+                                          className="
+                                          flex h-8 items-center
+                                          rounded-lg border
+                                          border-blue-800 px-1 text-blue-800
+                                          transition duration-200
+                                          hover:shadow-md
+                                          hover:shadow-blue-700/50
+                                          disabled:opacity-60
+                                          disabled:shadow-none
+                                          "
+                                          disabled={page <= 1}
+                                          onClick={previousPage}
+                                      >
 
+                                          <ChevronLeftIcon
+                                              className="h-4 w-4"
+                                          />
+                                          PREVIOUS
+                                      </button>
+
+                                      <button
+                                          className="
+                                          flex h-8 items-center
+                                          rounded-lg border
+                                          border-blue-800 px-1 text-blue-800
+                                          transition duration-200
+                                          hover:shadow-md
+                                          hover:shadow-blue-700/50
+                                          disabled:opacity-60
+                                          disabled:shadow-none
+                                          "
+                                          onClick={nextPage}
+                                      >
+                                          NEXT
+                                          <ChevronRightIcon
+                                              className="h-4 w-4"
+                                          />
+                                      </button>
+
+                                  </div>
                               </div>
 
                           </div>

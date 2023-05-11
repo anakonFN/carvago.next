@@ -51,7 +51,7 @@ export function CHeader() {
 
                         <li className="px-10 pb-6">
 
-                            <Link href="/cars">
+                            <Link href="/cars?page=1">
                                 <button
                                     onClick={() => {
                                       location.reload()
@@ -186,7 +186,7 @@ export function CHeader() {
                           <CButton
                               variant="routerLink"
                           >
-                              <Link href="/cars">
+                              <Link href="/cars?page=1">
                                   Buy
                               </Link>
                           </CButton >
