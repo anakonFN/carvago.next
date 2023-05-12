@@ -11,52 +11,52 @@ const meta: Meta<CAutocompleteProps<any>> = {
 export default meta
 
 const kmsDriven: {
-  value: number
-  name: string
+  key: number
+  label: string
 }[] = [
-  { value: 0, name: 'Any' },
-  { value: 1, name: '2500' },
-  { value: 2, name: '5000' },
-  { value: 3, name: '10000' },
+  { key: 1, label: 'Any' },
+  { key: 2, label: '2500' },
+  { key: 3, label: '5000' },
+  { key: 4, label: '10000' },
 
 ]
 
 export function Default({ ...props }) {
-  const [selected, setSelected] = useState()
+  const [selected, setSelected] = useState({ key: 0, label: '' })
 
   return (
       <CAutocomplete
           {...props}
           itemsList={kmsDriven}
-          // @ts-expect-error
-          label={selected}
           onChange={setSelected}
+          placeholder='kmsDriven'
+          value={selected}
       />
   )
 }
 
 export function AutocompleteGroup({ ...props }) {
-  const [selected1, setSelected1] = useState()
-  const [selected2, setSelected2] = useState()
+  const [selected1, setSelected1] = useState({ key: 0, label: '' })
+  const [selected2, setSelected2] = useState({ key: 0, label: '' })
 
   return (
       <div className='flex'>
           <CAutocomplete
               {...props}
               itemsList={kmsDriven}
-              // @ts-expect-error
-              label={selected1}
               onChange={setSelected1}
+              placeholder='kmsDriven'
               rounededSide='left'
+              value={selected1}
           />
 
           <CAutocomplete
               {...props}
               itemsList={kmsDriven}
-              // @ts-expect-error
-              label={selected2}
               onChange={setSelected2}
+              placeholder='kmsDriven'
               rounededSide='right'
+              value={selected2}
           />
       </div>
   )

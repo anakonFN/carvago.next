@@ -12,16 +12,16 @@ export default meta
 export const Default: Story = () => {
   const options = [
     {
-      name: 'Передній',
-      value: 1,
+      label: 'Передній',
+      key: 1,
     },
     {
-      name: 'Задній',
-      value: 2,
+      label: 'Задній',
+      key: 2,
     },
     {
-      name: 'Повний',
-      value: 3,
+      label: 'Повний',
+      key: 3,
     },
   ]
 
