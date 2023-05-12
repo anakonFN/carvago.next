@@ -5,7 +5,7 @@ import { ChevronRightIcon } from '@heroicons/react/20/solid'
 import { CAutocomplete } from '@/shared/ui/CAutocomplete'
 import { CCheckbox } from '@/shared/ui/CCheckbox'
 import { CButton } from '@/shared/ui/CButton'
-import { useMarks, useModels } from '@/shared/api/parameters'
+import { useModels, useParams } from '@/shared/api/parameters'
 
 import { Stars } from './assets/stars'
 
@@ -16,21 +16,26 @@ import {
 } from './config'
 
 export function HomeSearchForm() {
-  const { data: marks } = useMarks()
+  const { data: params } = useParams()
 
-  const [selectedMark, setSelectedMark]
-   = useState<Option>({ value: 0, name: '' })
-  const [selectedModel, setSelectedModel]
-   = useState<Option>({ value: 0, name: '' })
+  const [selectedMark, setSelectedMark] = useState({ key: 0, label: '' })
+  const [selectedModel, setSelectedModel] = useState({ key: 0, label: '' })
   const [selectedMileage, setSelectedMileage]
-   = useState<Option>({ value: 0, name: '' })
+   = useState<Option>({ key: 0, label: '' })
   const [selectedRegisterDate, setSelectedRegisterDate]
-   = useState<Option>({ value: 0, name: '' })
+   = useState<Option>({ key: 0, label: '' })
   const [selectedPrice, setSelectedPrice]
-   = useState<Option>({ value: 0, name: '' })
+   = useState<Option>({ key: 0, label: '' })
   const [vat, setVat] = useState(false)
 
-  const { data: models } = useModels(selectedMark.value)
+  const { data: models } = useModels(selectedMark.key)
+
+  const correctModels = models?.map((model) => {
+    return {
+      label: model.name,
+      key: model.id,
+    }
+  })
 
   return (
       <div className="w-full md:max-w-xl">
@@ -54,7 +59,7 @@ export function HomeSearchForm() {
                       "
                   >
                       <CAutocomplete
-                          itemsList={marks ?? []}
+                          itemsList={params?.make ?? []}
                           onChange={setSelectedMark}
                           openByClick
                           placeholder="Make"
@@ -62,8 +67,8 @@ export function HomeSearchForm() {
                       />
 
                       <CAutocomplete
-                          disabled={selectedMark.name.length === 0}
-                          itemsList={models ?? []}
+                          disabled={selectedMark.label.length === 0}
+                          itemsList={correctModels ?? []}
                           onChange={setSelectedModel}
                           openByClick
                           placeholder="Model"
