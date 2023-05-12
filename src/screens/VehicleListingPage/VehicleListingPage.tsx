@@ -20,14 +20,18 @@ import { options } from './config'
 export function VehicleListingPage() {
   const router = useRouter()
 
-  const page = Number(router.query.page)
+  const page = Number(router.query.page ?? 1)
 
   const nextPage = () => {
     void router.push(`/cars?page=${page + 1}`)
   }
 
   const previousPage = () => {
-    void router.push(`/cars?page=${page - 1}`)
+    if (page - 1 === 1)
+      void router.push('/cars')
+
+    else
+      void router.push(`/cars?page=${page - 1}`)
   }
 
   const firstPage = () => {
@@ -41,7 +45,7 @@ export function VehicleListingPage() {
     setSelectedSort(e.target.value)
   }
 
-  const { data: cars, isLoading, isFetching } = useVehicles(page, 10)
+  const { data: cars, isLoading, isFetching } = useVehicles(page, 10, {})
 
   if (isLoading) {
     return (

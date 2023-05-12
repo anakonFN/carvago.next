@@ -5,8 +5,8 @@ import { Float } from '@headlessui-float/react'
 import { ChevronDownIcon } from '@heroicons/react/24/outline'
 
 interface Option {
-  name: string
-  value: number
+  label: string
+  key: number
 }
 
 export interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -26,15 +26,15 @@ export function CCheckboxGroup({
             return (
                 <div
                     className="max-w-[12rem]"
-                    key={option.value}
+                    key={option.key}
                 >
                     <input
-                        checked={isChecked(option.value)}
+                        checked={isChecked(option.key)}
                         className="peer hidden"
-                        id={option.name}
+                        id={option.label}
                         name="checkbox-group"
                         type="checkbox"
-                        value={option.value}
+                        value={option.label}
                         {...props}
                     />
 
@@ -47,12 +47,12 @@ export function CCheckboxGroup({
                             'transition-all',
                             'hover:border-blue-400',
                           ],
-                          isChecked(option.value)
+                          isChecked(option.key)
                           && 'border-blue-300 bg-blue-100/75',
                           option === mainOptions[0]
                           && ['rounded-l-md border-r-0'],
                         )}
-                        htmlFor={option.name}
+                        htmlFor={option.label}
                     >
                         <div
                             className={
@@ -61,13 +61,13 @@ export function CCheckboxGroup({
                                   'w-full select-none font-semibold',
                                   'text-center text-sm text-indigo-900/50',
                                 ],
-                                isChecked(option.value)
+                                isChecked(option.key)
                                 && 'text-indigo-900/100',
                               )
                             }
 
                         >
-                            {option.name}
+                            {option.label}
                         </div>
                     </label>
                 </div>
@@ -105,16 +105,16 @@ export function CCheckboxGroup({
                                 flex flex-auto items-center px-3
                                 py-2 hover:bg-slate-100
                                 "
-                                key={option.value}
+                                key={option.key}
                             >
                                 <input
-                                    checked={isChecked(option.value)}
+                                    checked={isChecked(option.key)}
                                     className="border border-indigo-600
                                     p-2 focus:[box-shadow:none]"
-                                    id={option.name}
+                                    id={option.label}
                                     name="checkbox-group"
                                     type="checkbox"
-                                    value={option.value}
+                                    value={option.key}
                                     {...props}
                                 />
 
@@ -122,9 +122,9 @@ export function CCheckboxGroup({
                                     className="
                                     ml-5 w-full select-none font-light
                                     "
-                                    htmlFor={option.name}
+                                    htmlFor={option.label}
                                 >
-                                    {option.name}
+                                    {option.label}
                                 </label>
                             </div>
                         )

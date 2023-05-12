@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-closing-tag-location */
 import {
   ArrowTrendingDownIcon,
   ArrowUturnLeftIcon, ChevronRightIcon, FunnelIcon, XMarkIcon,
@@ -15,18 +14,12 @@ import { CCheckboxGroup } from '@/shared/ui/CCheckboxGroup'
 import { CColorPicker } from '@/shared/ui/CColorPicker'
 
 import {
-  useCities,
-  useDriverType,
-  useFuels,
-  useMarks,
   useModels,
-  useOptions,
-  useRegions,
-  useTransmissions,
+  useParams,
 } from '@/shared/api/parameters'
 
 import {
-  colors,
+  features as options,
   price,
 } from './config'
 
@@ -44,30 +37,29 @@ export function SearchForm({
   carNumber,
   ...props
 }: Props) {
-  const { data: marks } = useMarks()
-  const { data: regions } = useRegions()
-  const { data: driverTypes } = useDriverType()
-  const { data: fuels } = useFuels()
-  const { data: transmissions } = useTransmissions()
-  const { data: options } = useOptions()
+  const { data: params } = useParams()
 
-  const [selectedMark, setSelectedMark] = useState({ value: 0, name: '' })
-  const [selectedModel, setSelectedModel] = useState({ value: 0, name: '' })
-  const [minPrice, setMinPrice] = useState({ value: 0, name: '' })
-  const [maxPrice, setMaxPrice] = useState({ value: 0, name: '' })
-  const [selectedRegion, setSelectedRegion] = useState({ value: 0, name: '' })
-  const [selectedCity, setSelectedCity] = useState({ value: 0, name: '' })
+  const [selectedMark, setSelectedMark] = useState({ key: 0, label: '' })
+  const [selectedModel, setSelectedModel] = useState({ key: 0, label: '' })
+  const [minPrice, setMinPrice] = useState({ key: 0, label: '' })
+  const [maxPrice, setMaxPrice] = useState({ key: 0, label: '' })
   const [selectedDriverTypes, setSelectedDriverTypes]
   = useState<number[]>([])
   const [selectedFuels, setSelectedFuels]
   = useState<number[]>([])
   const [selectedTransmissions, setSelectedTransmissions]
   = useState<number[]>([])
-  const [selectedColors, setSelecetedColors] = useState<string[]>([])
-  const [selectedOptions, setSelectedOptions] = useState<number[]>([])
+  const [selectedColors, setSelecetedColors] = useState<number[]>([])
+  const [selectedOptions, setSelectedOptions] = useState<string[]>([])
 
-  const { data: models } = useModels(selectedMark.value)
-  const { data: cities } = useCities(selectedRegion.value)
+  const { data: models } = useModels(selectedMark.key)
+
+  const correctModels = models?.map((model) => {
+    return {
+      label: model.name,
+      key: model.id,
+    }
+  })
 
   const onChangeDriverTypes = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseInt(e.target.value)
@@ -100,7 +92,7 @@ export function SearchForm({
     else { setSelectedTransmissions([...selectedTransmissions, value]) }
   }
   const onChangeColor = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { target: { value } } = e
+    const value = parseInt(e.target.value)
     if (selectedColors.includes(value)) {
       const filteredValues = selectedColors.filter((item) => {
         return item !== value
@@ -110,7 +102,7 @@ export function SearchForm({
     else { setSelecetedColors([...selectedColors, value]) }
   }
   const onChangeOptions = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = Number(e.target.value)
+    const value = e.target.value
     if (selectedOptions.includes(value)) {
       const filteredValues = selectedOptions.filter((item) => {
         return item !== value
@@ -207,7 +199,7 @@ export function SearchForm({
 
                       <div className='mb-2'>
                           <CAutocomplete
-                              itemsList={marks ?? []}
+                              itemsList={params?.make ?? []}
                               onChange={setSelectedMark}
                               placeholder='Make'
                               value={selectedMark}
@@ -217,8 +209,8 @@ export function SearchForm({
                       <div>
 
                           <CAutocomplete
-                              disabled={selectedMark.name.length === 0}
-                              itemsList={models ?? []}
+                              disabled={selectedMark.label.length === 0}
+                              itemsList={correctModels ?? []}
                               onChange={setSelectedModel}
                               placeholder='Model'
                               value={selectedModel}
@@ -248,32 +240,6 @@ export function SearchForm({
                       />
                   </div>
 
-                  <div className='my-4'>
-                      <div className="text-sm font-semibold text-slate-700">
-                          REGION AND CITY
-                      </div>
-
-                      <div className='mb-2'>
-                          <CAutocomplete
-                              itemsList={regions ?? []}
-                              onChange={setSelectedRegion}
-                              placeholder='Region'
-                              value={selectedRegion}
-                          />
-                      </div>
-
-                      <div>
-
-                          <CAutocomplete
-                              disabled={selectedRegion.name.length === 0}
-                              itemsList={cities ?? []}
-                              onChange={setSelectedCity}
-                              placeholder='City'
-                              value={selectedCity}
-                          />
-                      </div>
-                  </div>
-
                   <div className="my-4 rounded-md bg-slate-100 px-2 py-3">
                       <CCheckbox>
                           <div className="flex items-center">
@@ -282,7 +248,7 @@ export function SearchForm({
                                   whitespace-nowrap text-sm text-slate-600
                                   "
                               >
-                                  Discounted cars
+                                  Disided cars
                               </div>
 
                               <ExclamationCircleIcon
@@ -313,20 +279,22 @@ export function SearchForm({
                           </div>
 
                           { selectedDriverTypes.length >= 1
-                        && <div
+                        && (
+                        <div
                             className="
                             mb-1 h-6 w-6 rounded-full
                             bg-blue-600 text-center font-semibold text-white
                             "
-                           >
+                        >
                             {selectedDriverTypes.length}
-                        </div>}
+                        </div>
+                        )}
                       </div>
 
                       <CCheckboxGroup
-                          mainOptions={driverTypes?.slice(0, 2) ?? []}
+                          mainOptions={params?.drive?.slice(0, 2) ?? []}
                           onChange={onChangeDriverTypes}
-                          options={driverTypes ?? []}
+                          options={params?.drive ?? []}
                           values={selectedDriverTypes}
                       />
                   </div>
@@ -342,20 +310,22 @@ export function SearchForm({
                           </div>
 
                           { selectedFuels.length >= 1
-                        && <div
+                        && (
+                        <div
                             className="
                             mb-1 h-6 w-6 rounded-full
                             bg-blue-600 text-center font-semibold text-white
                             "
-                           >
+                        >
                             {selectedFuels.length}
-                        </div>}
+                        </div>
+                        )}
                       </div>
 
                       <CCheckboxGroup
-                          mainOptions={fuels?.slice(0, 2) ?? []}
+                          mainOptions={params?.fuel_type.slice(0, 2) ?? []}
                           onChange={onChangeFuels}
-                          options={fuels ?? []}
+                          options={params?.fuel_type ?? []}
                           values={selectedFuels}
                       />
                   </div>
@@ -371,20 +341,22 @@ export function SearchForm({
                           </div>
 
                           { selectedTransmissions.length >= 1
-                        && <div
+                        && (
+                        <div
                             className="
                             mb-1 h-6 w-6 rounded-full
                             bg-blue-600 text-center font-semibold text-white
                             "
-                           >
+                        >
                             {selectedTransmissions.length}
-                        </div>}
+                        </div>
+                        )}
                       </div>
 
                       <CCheckboxGroup
-                          mainOptions={transmissions?.slice(1, 3) ?? []}
+                          mainOptions={params?.transmission?.slice(0, 2) ?? []}
                           onChange={onChangeTransmission}
-                          options={transmissions ?? []}
+                          options={params?.transmission ?? []}
                           values={selectedTransmissions}
                       />
                   </div>
@@ -405,7 +377,7 @@ export function SearchForm({
                       </div>
 
                       <CColorPicker
-                          colors={colors}
+                          colors={params?.color ?? []}
                           onChange={onChangeColor}
                           values={selectedColors}
                       />
@@ -425,13 +397,13 @@ export function SearchForm({
                               <CCheckbox
                                   checked={
                                     selectedOptions
-                                      .includes(option.value)
+                                      .includes(option)
                                   }
-                                  key={option.value}
+                                  key={option}
                                   onChange={onChangeOptions}
-                                  value={option.value}
+                                  value={option}
                               >
-                                  {option.name}
+                                  {option}
                               </CCheckbox>
                           ))}
                       </div>

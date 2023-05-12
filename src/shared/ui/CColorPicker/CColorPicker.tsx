@@ -1,7 +1,13 @@
 /* eslint-disable react/jsx-closing-tag-location */
+
+interface Option {
+  label: string
+  key: number
+}
+
 export interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
-  colors: string[]
-  values: string[]
+  colors: Option[]
+  values: number[]
 }
 
 export function CColorPicker({ colors, values, ...props }: Props) {
@@ -20,24 +26,26 @@ export function CColorPicker({ colors, values, ...props }: Props) {
             return (
                 <div
                     className="group relative"
-                    key={color}
+                    key={color.label}
                 >
                     <input
-                        checked={values.includes(color)}
+                        checked={values.includes(color.key)}
                         className={clsx(
                           'cursor-pointer rounded-full',
                           'border border-white/0',
                           'p-2 ring-offset-2 focus:ring-2',
-                          values.includes(color) && 'ring-1',
-                          values.includes(color) && 'ring-blue-700',
+                          color.label.includes('White')
+                           && 'border border-gray-400',
+                          values.includes(color.key) && 'ring-1',
+                          values.includes(color.key) && 'ring-blue-700',
                         )}
-                        id={color}
+                        id={color.label}
                         name="color-picker"
                         onMouseEnter={show}
                         onMouseLeave={hide}
-                        style={{ background: color }}
+                        style={{ background: color.label }}
                         type="checkbox"
-                        value={color}
+                        value={color.key}
                         {...props}
                     />
 
@@ -48,9 +56,9 @@ export function CColorPicker({ colors, values, ...props }: Props) {
                               bg-slate-700 p-1 text-xs text-white
                               transition-[display] delay-300 group-hover:block
                               "
-                              htmlFor={color}
+                              htmlFor={color.label}
                         >
-                          {color}
+                          {color.label}
 
                       </label>
                       : null}
