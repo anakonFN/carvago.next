@@ -4,8 +4,9 @@ import { vehicleAPI } from './types'
 
 const BASE_URL = 'https://carvago-server.vercel.app'
 
-export function useVehicles(page = 1, limit = 1, filters) {
+export function useVehicles(page = 1, limit = 1, filters: any) {
   const queryParams = new URLSearchParams(
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     {
       page,
       limit,
