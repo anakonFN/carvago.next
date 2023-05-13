@@ -1,7 +1,6 @@
 import Image from 'next/image'
 
 import {
-  CalendarDaysIcon,
   CalendarIcon,
   Cog8ToothIcon,
   MapPinIcon,
@@ -83,7 +82,7 @@ export function VehicleCard({ car, ...props }: Props) {
 
                           <div className="text-xs font-semibold">
 
-                              {`${car.mileage}K`}
+                              {`${car.mileage}`}
 
                               {' '}
 
@@ -228,14 +227,6 @@ export function VehicleCard({ car, ...props }: Props) {
 
                               <span className="self-end text-xs font-bold">
                                   {car.location_country.name}
-                              </span>
-                          </div>
-
-                          <div className="flex gap-1">
-                              <CalendarDaysIcon className="h-5 w-5" />
-
-                              <span className="self-end text-xs font-bold">
-                                  {car.source_created_at}
                               </span>
                           </div>
                       </div>
