@@ -19,8 +19,10 @@ import {
 } from '@/shared/api/parameters'
 
 import {
+  kmsDriven,
   features as options,
   price,
+  registerDate,
 } from './config'
 
 interface Props extends React.BaseHTMLAttributes<HTMLDivElement> {
@@ -219,10 +221,32 @@ export function SearchForm({
                   </div>
 
                   <div className="text-sm font-semibold text-slate-700">
+                      KMS DRIVEN
+                  </div>
+
+                  <div className="mb-4 flex">
+                      <CAutocomplete
+                          itemsList={kmsDriven}
+                          onChange={setMinPrice}
+                          placeholder="FROM"
+                          rounededSide="left"
+                          value={minPrice}
+                      />
+
+                      <CAutocomplete
+                          itemsList={kmsDriven}
+                          onChange={setMaxPrice}
+                          placeholder="To"
+                          rounededSide="right"
+                          value={maxPrice}
+                      />
+                  </div>
+
+                  <div className="text-sm font-semibold text-slate-700">
                       PRICE VAT INCL. (EUR)
                   </div>
 
-                  <div className="flex">
+                  <div className="mb-4 flex">
                       <CAutocomplete
                           itemsList={price}
                           onChange={setMinPrice}
@@ -233,6 +257,28 @@ export function SearchForm({
 
                       <CAutocomplete
                           itemsList={price}
+                          onChange={setMaxPrice}
+                          placeholder="To"
+                          rounededSide="right"
+                          value={maxPrice}
+                      />
+                  </div>
+
+                  <div className="text-sm font-semibold text-slate-700">
+                      REGISTRATION
+                  </div>
+
+                  <div className="flex">
+                      <CAutocomplete
+                          itemsList={registerDate}
+                          onChange={setMinPrice}
+                          placeholder="From"
+                          rounededSide="left"
+                          value={minPrice}
+                      />
+
+                      <CAutocomplete
+                          itemsList={registerDate}
                           onChange={setMaxPrice}
                           placeholder="To"
                           rounededSide="right"

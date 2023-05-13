@@ -1,19 +1,19 @@
 import { z } from 'zod'
 import { useQuery } from '@tanstack/react-query'
-import { vehicleAPI } from './types'
+import { type filterAPI, vehicleAPI } from './types'
 
 const BASE_URL = 'https://carvago-server.vercel.app'
 
-export function useVehicles(page = 1, limit = 1, filters: any) {
+export function useVehicles(page = 1, limit = 1, filters: Partial<filterAPI>) {
   const queryParams = new URLSearchParams(
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+    // @ts-expect-error
     {
       page,
       limit,
       ...filters,
     }).toString()
 
-  return useQuery(['vehicles', page], async () => {
+  return useQuery(['vehicles', page, filters], async () => {
     return z.array(vehicleAPI)
       .parse(await fetch(
         `${BASE_URL}/api/listedcars?${queryParams}`,

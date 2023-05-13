@@ -42,10 +42,16 @@ export function VehicleListingPage() {
   const [showSearchForm, setShowSearchForm] = useState(false)
 
   const onChangeSort = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSelectedSort(e.target.value)
+    const { value } = e.target
+    const correctOption = options.find(option => option.sortName === value)
+    setSelectedSort(correctOption)
   }
 
-  const { data: cars, isLoading, isFetching } = useVehicles(page, 10, {})
+  const { data: cars, isLoading, isFetching }
+  = useVehicles(page, 10, {
+    sort: selectedSort?.sortValue,
+    direction: selectedSort?.direction,
+  })
 
   if (isLoading) {
     return (
