@@ -10,17 +10,40 @@ const meta: Meta<CRadioGroupProps> = {
 export default meta
 
 const options = [
-  'Recommended',
-  'Lowest mileage',
-  'Highest price',
-  'Lowest price',
+  {
+    sortName: 'Recommended',
+    sortValue: 'recommended',
+    direction: 'asc',
+  },
+  {
+    sortName: 'Lowest Price',
+    sortValue: 'price',
+    direction: 'asc',
+  },
+  {
+    sortName: 'Highest Price',
+    sortValue: 'price',
+    direction: 'desc',
+  },
+  {
+    sortName: 'Newest ad',
+    sortValue: 'publish-date',
+    direction: 'desc',
+  },
+  {
+    sortName: 'Lowest mileage',
+    sortValue: 'mileage',
+    direction: 'asc',
+  },
 ]
 
 export function Default() {
   const [value, setValue] = useState(options[0])
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value)
+    const { value } = e.target
+    const correctOption = options.find(option => option.sortName === value)
+    setValue(correctOption)
   }
 
   return (
