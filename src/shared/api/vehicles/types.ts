@@ -61,8 +61,8 @@ export const vehicleAPI = z.object({
 })
 
 export const filterAPI = z.object({
-  'make': z.number(),
-  'model-family': z.number(),
+  'make': z.array(z.number()),
+  'model-family': z.array(z.number()),
   'price-from': z.number(),
   'price-to': z.number(),
   'sort': z.string(),

@@ -118,8 +118,8 @@ export function VehicleListingPage() {
   }
 
   interface IParams {
-    'make': number
-    'model-family': number
+    'make[]': number
+    'model-family[]': number
     'sort': string
     'direction': string
     'transmission': number[]
@@ -160,10 +160,10 @@ export function VehicleListingPage() {
     params['price-to'] = maxPrice.key
 
   if (selectedModel.key === 0)
-    params.make = selectedMark.key
+    params['make[]'] = selectedMark.key
 
   if (selectedModel.key >= 1)
-    params['model-family'] = selectedModel.key
+    params['model-family[]'] = selectedModel.key
 
   const { data: cars, isLoading, isFetching }
   = useVehicles(page, 10, params)
