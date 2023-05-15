@@ -106,7 +106,7 @@ export function VehicleCard({ car, ...props }: Props) {
                           />
 
                           <div className="text-xs font-semibold">
-                              {car.power}
+                              {car.power_hp}
 
                               {' '}
                               hp

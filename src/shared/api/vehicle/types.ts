@@ -53,6 +53,7 @@ export const vehicleAPI = z.object({
       ordering: z.number(),
     }),
   ),
+  power_hp: z.number().nullable(),
 })
 
 export type vehicleAPI = z.infer<typeof vehicleAPI>

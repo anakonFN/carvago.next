@@ -58,6 +58,7 @@ export const vehicleAPI = z.object({
       ordering_computed: z.number().nullable(),
     }),
   ),
+  power_hp: z.number().nullable(),
 })
 
 export const filterAPI = z.object({

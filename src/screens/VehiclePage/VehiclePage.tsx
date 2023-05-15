@@ -421,14 +421,14 @@ export function VehiclePage({ carId = '54022280' }: Props) {
                               </div>
 
                               <div className="text-sm font-semibold">
-                                  {Math.trunc(car.power * 0.74)}
+                                  {car.power}
 
                                   {' '}
 
                                   kW
 
                                   (
-                                  {car.power}
+                                  {car.power_hp}
 
                                   {' '}
                                   hp)
