@@ -55,7 +55,7 @@ export function VehicleCard({ car, ...props }: Props) {
                   />
               </div>
 
-              <div className="flex h-[440px] flex-col md:h-full">
+              <div className="flex flex-col md:h-full">
                   <div
                       className="
                       mb-3 text-lg font-semibold leading-6

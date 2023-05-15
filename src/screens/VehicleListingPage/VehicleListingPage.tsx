@@ -389,8 +389,8 @@ export function VehicleListingPage() {
 
                               <div
                                   className="
-                                    grid-cols-2 flex-col gap-3
-                                    px-2 sm:grid
+                                    flex flex-col gap-3 px-2
+                                    sm:grid sm:grid-cols-2
                                     sd:flex-row sd:gap-4
                                     md:flex md:flex-col md:px-0
                                     "
