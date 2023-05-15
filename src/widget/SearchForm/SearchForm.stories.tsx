@@ -15,6 +15,11 @@ export function Default() {
   const [selectedModel, setSelectedModel] = useState({ key: 0, label: '' })
   const [minPrice, setMinPrice] = useState({ key: 0, label: '' })
   const [maxPrice, setMaxPrice] = useState({ key: 0, label: '' })
+  const [kmsDrivenFrom, setKmsDrivenFrom] = useState({ key: 0, label: '' })
+  const [kmsDrivenTo, setKmsDrivenTo] = useState({ key: 0, label: '' })
+  const [registrationFrom, setRegistrationFrom]
+  = useState({ key: 0, label: '' })
+  const [registrationTo, setRegistrationTo] = useState({ key: 0, label: '' })
   const [selectedDriverTypes, setSelectedDriverTypes]
   = useState<number[]>([])
   const [selectedFuels, setSelectedFuels]
@@ -87,6 +92,10 @@ export function Default() {
       }
           setters={
         {
+          setKmsDrivenFrom,
+          setKmsDrivenTo,
+          setRegistrationFrom,
+          setRegistrationTo,
           setMaxPrice,
           setMinPrice,
           setSelectedModel,
@@ -98,6 +107,10 @@ export function Default() {
           selectedMark,
           maxPrice,
           minPrice,
+          kmsDrivenFrom,
+          kmsDrivenTo,
+          registrationFrom,
+          registrationTo,
           selectedColors,
           selectedDriverTypes,
           selectedModel,

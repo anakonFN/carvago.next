@@ -125,7 +125,7 @@ export function HomeSearchForm() {
 
                       </CButton>
 
-                      <Link href="/cars?page=1">
+                      <Link href="/cars">
                           <button
                               className="
                               w-full rounded bg-blue-700

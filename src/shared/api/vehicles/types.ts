@@ -44,7 +44,7 @@ export const vehicleAPI = z.object({
       iso_code: z.string(),
     }),
     zip: z.string(),
-    email: z.null(),
+    email: z.string().nullable(),
     rating_average: z.number().nullable(),
     rating_count: z.number().nullable(),
     offers_count: z.number(),
@@ -61,7 +61,8 @@ export const vehicleAPI = z.object({
 })
 
 export const filterAPI = z.object({
-  'make': z.array(z.number()),
+  'make': z.number(),
+  'model-family': z.number(),
   'price-from': z.number(),
   'price-to': z.number(),
   'sort': z.string(),
@@ -71,8 +72,8 @@ export const filterAPI = z.object({
   'mileage-to': z.number(),
   'transmission': z.array(z.number()),
   'fuel-type': z.array(z.number()),
-  'drive': z.array(z.number()),
   'direction': z.string(),
+  'color': z.array(z.number()),
 })
 
 export type filterAPI = z.infer<typeof filterAPI>

@@ -46,6 +46,11 @@ export function VehicleListingPage() {
   const [selectedModel, setSelectedModel] = useState({ key: 0, label: '' })
   const [minPrice, setMinPrice] = useState({ key: 0, label: '' })
   const [maxPrice, setMaxPrice] = useState({ key: 0, label: '' })
+  const [kmsDrivenFrom, setKmsDrivenFrom] = useState({ key: 0, label: '' })
+  const [kmsDrivenTo, setKmsDrivenTo] = useState({ key: 0, label: '' })
+  const [registrationFrom, setRegistrationFrom]
+  = useState({ key: 0, label: '' })
+  const [registrationTo, setRegistrationTo] = useState({ key: 0, label: '' })
   const [selectedDriverTypes, setSelectedDriverTypes]
   = useState<number[]>([])
   const [selectedFuels, setSelectedFuels]
@@ -112,11 +117,56 @@ export function VehicleListingPage() {
     setSelectedSort(correctOption)
   }
 
+  interface IParams {
+    'make': number
+    'model-family': number
+    'sort': string
+    'direction': string
+    'transmission': number[]
+    'fuel-type': number[]
+    'price-from': number
+    'price-to': number
+    'registration-date-from': number
+    'registration-date-to': number
+    'mileage-from': number
+    'mileage-to': number
+    'color': number[]
+  }
+
+  const params: Partial<IParams> = {
+    'sort': selectedSort?.sortValue,
+    'direction': selectedSort?.direction,
+    'transmission': selectedTransmissions,
+    'fuel-type': selectedFuels,
+    'color': selectedColors,
+  }
+
+  if (kmsDrivenFrom.label)
+    params['mileage-from'] = kmsDrivenFrom.key
+
+  if (kmsDrivenTo.label)
+    params['mileage-to'] = kmsDrivenFrom.key
+
+  if (registrationFrom.label)
+    params['registration-date-from'] = registrationFrom.key
+
+  if (registrationTo.label)
+    params['registration-date-to'] = registrationTo.key
+
+  if (minPrice.label)
+    params['price-from'] = minPrice.key
+
+  if (maxPrice.label)
+    params['price-to'] = maxPrice.key
+
+  if (selectedModel.key === 0)
+    params.make = selectedMark.key
+
+  if (selectedModel.key >= 1)
+    params['model-family'] = selectedModel.key
+
   const { data: cars, isLoading, isFetching }
-  = useVehicles(page, 10, {
-    sort: selectedSort?.sortValue,
-    direction: selectedSort?.direction,
-  })
+  = useVehicles(page, 10, params)
 
   if (isLoading) {
     return (
@@ -227,6 +277,10 @@ export function VehicleListingPage() {
                             isMobile
                             setters={
                               {
+                                setKmsDrivenFrom,
+                                setKmsDrivenTo,
+                                setRegistrationFrom,
+                                setRegistrationTo,
                                 setMaxPrice,
                                 setMinPrice,
                                 setSelectedModel,
@@ -239,6 +293,10 @@ export function VehicleListingPage() {
                                 selectedMark,
                                 maxPrice,
                                 minPrice,
+                                kmsDrivenFrom,
+                                kmsDrivenTo,
+                                registrationFrom,
+                                registrationTo,
                                 selectedColors,
                                 selectedDriverTypes,
                                 selectedModel,
@@ -272,6 +330,10 @@ export function VehicleListingPage() {
                                   }
                                   setters={
                                     {
+                                      setKmsDrivenFrom,
+                                      setKmsDrivenTo,
+                                      setRegistrationFrom,
+                                      setRegistrationTo,
                                       setMaxPrice,
                                       setMinPrice,
                                       setSelectedModel,
@@ -283,6 +345,10 @@ export function VehicleListingPage() {
                                       selectedMark,
                                       maxPrice,
                                       minPrice,
+                                      kmsDrivenFrom,
+                                      kmsDrivenTo,
+                                      registrationFrom,
+                                      registrationTo,
                                       selectedColors,
                                       selectedDriverTypes,
                                       selectedModel,

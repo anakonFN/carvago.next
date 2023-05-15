@@ -2,13 +2,8 @@
 import type { Dispatch, SetStateAction } from 'react'
 
 import {
-  ArrowTrendingDownIcon,
   ArrowUturnLeftIcon, ChevronRightIcon, FunnelIcon, XMarkIcon,
 } from '@heroicons/react/24/outline'
-
-import {
-  ExclamationCircleIcon,
-} from '@heroicons/react/24/solid'
 
 import { CButton } from '@/shared/ui/CButton'
 import { CAutocomplete } from '@/shared/ui/CAutocomplete'
@@ -45,6 +40,10 @@ interface Props extends React.BaseHTMLAttributes<HTMLDivElement> {
     selectedModel: filterOption
     minPrice: filterOption
     maxPrice: filterOption
+    kmsDrivenFrom: filterOption
+    kmsDrivenTo: filterOption
+    registrationFrom: filterOption
+    registrationTo: filterOption
     selectedDriverTypes: number[]
     selectedFuels: number[]
     selectedTransmissions: number[]
@@ -63,6 +62,10 @@ interface Props extends React.BaseHTMLAttributes<HTMLDivElement> {
     setSelectedModel: Dispatch<SetStateAction<filterOption>>
     setMinPrice: Dispatch<SetStateAction<filterOption>>
     setMaxPrice: Dispatch<SetStateAction<filterOption>>
+    setKmsDrivenFrom: Dispatch<SetStateAction<filterOption>>
+    setKmsDrivenTo: Dispatch<SetStateAction<filterOption>>
+    setRegistrationTo: Dispatch<SetStateAction<filterOption>>
+    setRegistrationFrom: Dispatch<SetStateAction<filterOption>>
   }
 }
 
@@ -86,6 +89,13 @@ export function SearchForm({
       key: model.id,
     }
   })
+
+  const datesFrom = registerDate
+    .filter(data => Number(data.label) >= Number(states.registrationFrom.label))
+  const priceFrom = price
+    .filter(data => Number(data.label) >= Number(states.minPrice.label))
+  const kmsDrivenFrom = kmsDriven
+    .filter(kms => Number(kms.label) >= Number(states.kmsDrivenFrom.label))
 
   useEffect(() => {
     if (show && isMobile)
@@ -193,132 +203,79 @@ export function SearchForm({
                       </div>
                   </div>
 
-                  <div className="text-sm font-semibold text-slate-700">
-                      KMS DRIVEN
-                  </div>
-
-                  <div className="mb-4 flex">
-                      <CAutocomplete
-                          itemsList={kmsDriven}
-                          onChange={setters.setMinPrice}
-                          placeholder="FROM"
-                          rounededSide="left"
-                          value={states.minPrice}
-                      />
-
-                      <CAutocomplete
-                          itemsList={kmsDriven}
-                          onChange={setters.setMaxPrice}
-                          placeholder="To"
-                          rounededSide="right"
-                          value={states.maxPrice}
-                      />
-                  </div>
-
-                  <div className="text-sm font-semibold text-slate-700">
-                      PRICE VAT INCL. (EUR)
-                  </div>
-
-                  <div className="mb-4 flex">
-                      <CAutocomplete
-                          itemsList={price}
-                          onChange={setters.setMinPrice}
-                          placeholder="From"
-                          rounededSide="left"
-                          value={states.minPrice}
-                      />
-
-                      <CAutocomplete
-                          itemsList={price}
-                          onChange={setters.setMaxPrice}
-                          placeholder="To"
-                          rounededSide="right"
-                          value={states.maxPrice}
-                      />
-                  </div>
-
-                  <div className="text-sm font-semibold text-slate-700">
-                      REGISTRATION
-                  </div>
-
-                  <div className="flex">
-                      <CAutocomplete
-                          itemsList={registerDate}
-                          onChange={setters.setMinPrice}
-                          placeholder="From"
-                          rounededSide="left"
-                          value={states.minPrice}
-                      />
-
-                      <CAutocomplete
-                          itemsList={registerDate}
-                          onChange={setters.setMaxPrice}
-                          placeholder="To"
-                          rounededSide="right"
-                          value={states.maxPrice}
-                      />
-                  </div>
-
-                  <div className="my-4 rounded-md bg-slate-100 px-2 py-3">
-                      <CCheckbox>
-                          <div className="flex items-center">
-                              <div
-                                  className="
-                                  whitespace-nowrap text-sm text-slate-600
-                                  "
-                              >
-                                  Disided cars
-                              </div>
-
-                              <ExclamationCircleIcon
-                                  className="h-4 w-4 self-end text-slate-400"
-                              />
-
-                              <ArrowTrendingDownIcon
-                                  className="h-5 w-5 text-orange-400"
-                              />
-                          </div>
-                      </CCheckbox>
-                  </div>
-
-                  <div className="px-2">
-                      <CCheckbox>
-                          VAT deducion
-                      </CCheckbox>
-                  </div>
-
                   <div className='mb-4'>
-                      <div className="flex items-end justify-between">
-                          <div
-                              className="
-                              mb-1 mt-5 text-sm font-semibold text-slate-700
-                              "
-                          >
-                              DRIVER TYPES
-                          </div>
-
-                          { states.selectedDriverTypes.length >= 1
-                        && (
-                        <div
-                            className="
-                            mb-1 h-6 w-6 rounded-full
-                            bg-blue-600 text-center font-semibold text-white
-                            "
-                        >
-                            {states.selectedDriverTypes.length}
-                        </div>
-                        )}
+                      <div className="text-sm font-semibold text-slate-700">
+                          PRICE VAT INCL. (EUR)
                       </div>
 
-                      <CCheckboxGroup
-                          mainOptions={params?.drive?.slice(0, 2) ?? []}
-                          onChange={handlers.onChangeDriverTypes}
-                          options={params?.drive ?? []}
-                          values={states.selectedDriverTypes}
-                      />
+                      <div className="flex">
+                          <CAutocomplete
+                              itemsList={price}
+                              onChange={setters.setMinPrice}
+                              placeholder="From"
+                              rounededSide="left"
+                              value={states.minPrice}
+                          />
+
+                          <CAutocomplete
+                              itemsList={priceFrom}
+                              onChange={setters.setMaxPrice}
+                              placeholder="To"
+                              rounededSide="right"
+                              value={states.maxPrice}
+                          />
+                      </div>
                   </div>
 
                   <div className='mb-4'>
+                      <div className="text-sm font-semibold text-slate-700">
+                          REGISTRATION
+                      </div>
+
+                      <div className="flex">
+                          <CAutocomplete
+                              itemsList={registerDate}
+                              onChange={setters.setRegistrationFrom}
+                              placeholder="From"
+                              rounededSide="left"
+                              value={states.registrationFrom}
+                          />
+
+                          <CAutocomplete
+                              itemsList={datesFrom}
+                              onChange={setters.setRegistrationTo}
+                              placeholder="To"
+                              rounededSide="right"
+                              value={states.registrationTo}
+                          />
+                      </div>
+                  </div>
+
+                  <div>
+                      <div className="text-sm font-semibold text-slate-700">
+                          KMS DRIVEN
+                      </div>
+
+                      <div className="flex">
+                          <CAutocomplete
+                              itemsList={kmsDriven}
+                              onChange={setters.setKmsDrivenFrom}
+                              placeholder="From"
+                              rounededSide="left"
+                              value={states.kmsDrivenFrom}
+                          />
+
+                          <CAutocomplete
+                              itemsList={kmsDrivenFrom}
+                              onChange={setters.setKmsDrivenTo}
+                              placeholder="To"
+                              rounededSide="right"
+                              value={states.kmsDrivenTo}
+                          />
+                      </div>
+                  </div>
+
+                  <div>
                       <div className="flex items-end justify-between">
                           <div
                               className="
@@ -378,12 +335,6 @@ export function SearchForm({
                           options={params?.transmission ?? []}
                           values={states.selectedTransmissions}
                       />
-                  </div>
-
-                  <div className="px-2">
-                      <CCheckbox>
-                          VAT deducion
-                      </CCheckbox>
                   </div>
 
                   <div>

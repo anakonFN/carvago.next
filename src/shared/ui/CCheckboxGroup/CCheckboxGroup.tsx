@@ -34,7 +34,7 @@ export function CCheckboxGroup({
                         id={option.label}
                         name="checkbox-group"
                         type="checkbox"
-                        value={option.label}
+                        value={option.key}
                         {...props}
                     />
 
