@@ -16,14 +16,12 @@ export type Props<T extends Option> = ComboboxProps & {
   value: T
   placeholder: string
   rounededSide?: 'left' | 'right'
-  openByClick?: boolean
 }
 
 export function CAutocomplete<T extends Option>({
   itemsList,
   placeholder,
   rounededSide,
-  openByClick,
   ...props
 }: Props<T>) {
   const [query, setQuery] = useState('')
@@ -64,7 +62,7 @@ export function CAutocomplete<T extends Option>({
               <Combobox.Button
                   className={clsx(
                     'absolute inset-y-0 right-0 flex items-center pr-2',
-                    openByClick && 'w-full justify-end',
+                    'w-full justify-end',
 
                   )}
 
