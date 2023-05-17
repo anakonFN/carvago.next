@@ -10,7 +10,7 @@ import { useModels, useParams } from '@/shared/api/parameters'
 import { Stars } from './assets/stars'
 
 import {
-  type Option, mileage,
+  kmsDriven,
   price,
   registerDate,
 } from './config'
@@ -21,11 +21,11 @@ export function HomeSearchForm() {
   const [selectedMark, setSelectedMark] = useState({ key: 0, label: '' })
   const [selectedModel, setSelectedModel] = useState({ key: 0, label: '' })
   const [selectedMileage, setSelectedMileage]
-   = useState<Option>({ key: 0, label: '' })
+   = useState({ key: 0, label: '' })
   const [selectedRegisterDate, setSelectedRegisterDate]
-   = useState<Option>({ key: 0, label: '' })
+   = useState({ key: 0, label: '' })
   const [selectedPrice, setSelectedPrice]
-   = useState<Option>({ key: 0, label: '' })
+   = useState({ key: 0, label: '' })
   const [vat, setVat] = useState(false)
 
   const { data: models } = useModels(selectedMark.key)
@@ -61,7 +61,6 @@ export function HomeSearchForm() {
                       <CAutocomplete
                           itemsList={params?.make ?? []}
                           onChange={setSelectedMark}
-                          openByClick
                           placeholder="Make"
                           value={selectedMark}
                       />
@@ -70,15 +69,13 @@ export function HomeSearchForm() {
                           disabled={selectedMark.label.length === 0}
                           itemsList={correctModels ?? []}
                           onChange={setSelectedModel}
-                          openByClick
                           placeholder="Model"
                           value={selectedModel}
                       />
 
                       <CAutocomplete
-                          itemsList={mileage}
+                          itemsList={kmsDriven}
                           onChange={setSelectedMileage}
-                          openByClick
                           placeholder="Mileage"
                           value={selectedMileage}
                       />
@@ -86,7 +83,6 @@ export function HomeSearchForm() {
                       <CAutocomplete
                           itemsList={registerDate}
                           onChange={setSelectedRegisterDate}
-                          openByClick
                           placeholder="Registration from"
                           value={selectedRegisterDate}
                       />
@@ -94,7 +90,6 @@ export function HomeSearchForm() {
                       <CAutocomplete
                           itemsList={price}
                           onChange={setSelectedPrice}
-                          openByClick
                           placeholder="Price"
                           value={selectedPrice}
                       />
