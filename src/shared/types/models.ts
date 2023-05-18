@@ -1,4 +1,9 @@
-export interface vehicle {
+export interface Option {
+  key: number
+  label: string
+}
+
+export interface Vehicle {
   id: string | number
   title: string
   power: number
@@ -45,4 +50,11 @@ export interface vehicle {
     name: string
   }[]
   fuelConsumptionCombined?: number | null
+}
+
+export interface Params {
+  make: Option[]
+  fuelType: Option[]
+  transmission: Option[]
+  color: Option[]
 }

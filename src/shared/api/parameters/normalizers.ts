@@ -1,4 +1,4 @@
-import type { option, params } from '@/shared/types/params'
+import type { Option, Params } from '@/shared/types/models'
 
 import { pick } from '../lib'
 
@@ -6,7 +6,7 @@ import type { modelAPI, paramsAPI } from './types'
 
 export function normalizeParameters(
   params: paramsAPI,
-): params {
+): Params {
   return {
     ...pick(
       params,
@@ -20,7 +20,7 @@ export function normalizeParameters(
 
 export function normalizeModel(
   model: modelAPI,
-): option {
+): Option {
   return {
     key: model.id,
     label: model.name,

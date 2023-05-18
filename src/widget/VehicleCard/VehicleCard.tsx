@@ -15,7 +15,7 @@ import {
 
 import { CButton } from '@/shared/ui/CButton'
 import { CCarousel } from '@/shared/ui/CCarousel'
-import type { vehicle } from '@/shared/types/models'
+import type { Vehicle } from '@/shared/types/models'
 
 import road from './assets/road.svg'
 import motor from './assets/motor.svg'
@@ -24,7 +24,7 @@ import hangar from './assets/hangar.svg'
 import occasion from './assets/occasion.svg'
 
 export interface Props extends React.BaseHTMLAttributes<HTMLDivElement> {
-  car: vehicle
+  car: Vehicle
 }
 
 export function VehicleCard({ car, ...props }: Props) {

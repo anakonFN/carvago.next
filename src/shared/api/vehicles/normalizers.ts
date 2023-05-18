@@ -1,4 +1,4 @@
-import type { vehicle } from '@/shared/types/models'
+import type { Vehicle } from '@/shared/types/models'
 
 import { pick } from '../lib'
 
@@ -6,7 +6,7 @@ import type { vehicleAPI } from './types'
 
 export function normalizeVehicles(
   vehicle: vehicleAPI,
-): vehicle {
+): Vehicle {
   const {
     drive,
     fuel_type,

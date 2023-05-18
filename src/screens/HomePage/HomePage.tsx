@@ -37,16 +37,16 @@ export function HomePage() {
 
                           <div
                               className="
-                          absolute
-                          inset-x-0 bottom-0
-                          h-80 w-full
-                          bg-[linear-gradient(0deg,_rgb(31,_43,_89)_28%,_rgba(31,_43,_89,_0)_100%)]
-                          after:absolute
-                          after:bottom-0
-                          after:z-[8]
-                          after:block after:h-[50px] after:w-full after:bg-white
-                          after:content-[''] after:[clip-path:polygon(100%_0,_0%_100%,_100%_100%)]
-                          "
+                              absolute
+                              inset-x-0 bottom-0
+                              h-80 w-full
+                              bg-[linear-gradient(0deg,_rgb(31,_43,_89)_28%,_rgba(31,_43,_89,_0)_100%)]
+                              after:absolute
+                              after:bottom-0
+                              after:z-[8]
+                              after:block after:h-[50px] after:w-full after:bg-white
+                              after:content-[''] after:[clip-path:polygon(100%_0,_0%_100%,_100%_100%)]
+                              "
                           />
                       </div>
 
