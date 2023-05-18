@@ -11,11 +11,8 @@ import { NavigateButtons } from './ui/NavigateButtons'
 
 export interface Props {
   images: {
-    id: number
+    id: number | string
     path: string
-    ordering: number
-    ordering_computed?: number | null
-    variants?: undefined[] | null
   }[]
   variant: 'small' | 'big'
 }

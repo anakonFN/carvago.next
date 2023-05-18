@@ -14,8 +14,8 @@ import {
 } from '@heroicons/react/24/solid'
 
 import { CButton } from '@/shared/ui/CButton'
-import type { vehicleAPI } from '@/shared/api/vehicles/types'
 import { CCarousel } from '@/shared/ui/CCarousel'
+import type { vehicle } from '@/shared/types/models'
 
 import road from './assets/road.svg'
 import motor from './assets/motor.svg'
@@ -24,14 +24,14 @@ import hangar from './assets/hangar.svg'
 import occasion from './assets/occasion.svg'
 
 export interface Props extends React.BaseHTMLAttributes<HTMLDivElement> {
-  car: vehicleAPI
+  car: vehicle
 }
 
 export function VehicleCard({ car, ...props }: Props) {
   const numbFmt = new Intl.NumberFormat('ru-RU')
-    .format(Math.trunc(car.uniform_price))
+    .format(Math.trunc(car.price))
   const numbFmtVAT = new Intl
-    .NumberFormat('ru-RU').format(Math.trunc(car.uniform_price))
+    .NumberFormat('ru-RU').format(Math.trunc(car.price))
 
   return (
       <div
@@ -82,7 +82,7 @@ export function VehicleCard({ car, ...props }: Props) {
 
                           <div className="text-xs font-semibold">
 
-                              {`${car.mileage}`}
+                              {`${car.kmsDriven}`}
 
                               {' '}
 
@@ -94,7 +94,7 @@ export function VehicleCard({ car, ...props }: Props) {
                           <CalendarIcon className="h-4 w-4" />
 
                           <div className="text-xs font-semibold">
-                              {car.registration_date}
+                              {car.registrationDate}
                           </div>
                       </div>
 
@@ -106,7 +106,7 @@ export function VehicleCard({ car, ...props }: Props) {
                           />
 
                           <div className="text-xs font-semibold">
-                              {car.power_hp}
+                              {car.powerHp}
 
                               {' '}
                               hp
@@ -129,11 +129,11 @@ export function VehicleCard({ car, ...props }: Props) {
                           />
 
                           <div className="text-xs font-semibold">
-                              {car.fuel_type.name}
+                              {car.fuelType.name}
                           </div>
                       </div>
 
-                      {car.drive.name === '4X4'
+                      {car.driveType.name === '4X4'
                         ? (
                             <div className="flex items-center gap-2">
                                 <Image
@@ -226,7 +226,7 @@ export function VehicleCard({ car, ...props }: Props) {
                               <MapPinIcon className="h-5 w-5" />
 
                               <span className="self-end text-xs font-bold">
-                                  {car.location_country.name}
+                                  {car.locationCountry.name}
                               </span>
                           </div>
                       </div>

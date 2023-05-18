@@ -2,6 +2,7 @@ import { z } from 'zod'
 
 import { type filterAPI, vehicleAPI } from './types'
 import { BASE_URL } from '../lib'
+import { normalizeVehicles } from './normalizers'
 
 export const vehiclesKeys = {
   GetVehicles: (page: number, filters: Partial<filterAPI>, limit: number) => [
@@ -23,5 +24,5 @@ export async function vehiclesFetcher(queryParams: string) {
       await fetch(
         `${BASE_URL}${vehiclesEndPoints.getVehicles(queryParams)}`,
       ).then(r => r.json()),
-    )
+    ).map(vehicle => normalizeVehicles(vehicle))
 }

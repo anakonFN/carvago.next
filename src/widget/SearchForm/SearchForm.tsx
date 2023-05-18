@@ -83,13 +83,6 @@ export function SearchForm({
 
   const { data: models } = useModels(states.selectedMark.key)
 
-  const correctModels = models?.map((model) => {
-    return {
-      label: model.name,
-      key: model.id,
-    }
-  })
-
   const datesFrom = registerDate
     .filter(data => Number(data.label) >= Number(states.registrationFrom.label))
   const priceFrom = price
@@ -195,7 +188,7 @@ export function SearchForm({
 
                           <CAutocomplete
                               disabled={states.selectedMark.label.length === 0}
-                              itemsList={correctModels ?? []}
+                              itemsList={models ?? []}
                               onChange={setters.setSelectedModel}
                               placeholder='Model'
                               value={states.selectedModel}
@@ -299,9 +292,9 @@ export function SearchForm({
                       </div>
 
                       <CCheckboxGroup
-                          mainOptions={params?.fuel_type.slice(0, 2) ?? []}
+                          mainOptions={params?.fuelType.slice(0, 2) ?? []}
                           onChange={handlers.onChangeFuels}
-                          options={params?.fuel_type ?? []}
+                          options={params?.fuelType ?? []}
                           values={states.selectedFuels}
                       />
                   </div>

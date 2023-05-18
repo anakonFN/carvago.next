@@ -30,13 +30,6 @@ export function HomeSearchForm() {
 
   const { data: models } = useModels(selectedMark.key)
 
-  const correctModels = models?.map((model) => {
-    return {
-      label: model.name,
-      key: model.id,
-    }
-  })
-
   return (
       <div className="w-full md:max-w-xl">
           <div className="mb-4 rounded-xl bg-white">
@@ -67,7 +60,7 @@ export function HomeSearchForm() {
 
                       <CAutocomplete
                           disabled={selectedMark.label.length === 0}
-                          itemsList={correctModels ?? []}
+                          itemsList={models ?? []}
                           onChange={setSelectedModel}
                           placeholder="Model"
                           value={selectedModel}

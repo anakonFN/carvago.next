@@ -1,4 +1,5 @@
 import { vehicleAPI } from './types'
+import { normalizeVehicle } from './normalizers'
 import { BASE_URL } from '../lib'
 
 export const vehicleKeys = {
@@ -10,7 +11,9 @@ export const vehicleEndPoints = {
 }
 
 export async function VehicleFetcher(carId: string) {
-  return vehicleAPI
-    .parse(await fetch(`${BASE_URL}${vehicleEndPoints.getVehicle(carId)}`)
-      .then(r => r.json()))
+  return normalizeVehicle(
+    vehicleAPI
+      .parse(await fetch(`${BASE_URL}${vehicleEndPoints.getVehicle(carId)}`)
+        .then(r => r.json())),
+  )
 }

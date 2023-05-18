@@ -7,12 +7,6 @@ export const paramsAPI = z.object({
       key: z.number(),
     }),
   ),
-  drive: z.array(
-    z.object({
-      label: z.string(),
-      key: z.number(),
-    }),
-  ),
   fuel_type: z.array(
     z.object({
       label: z.string(),

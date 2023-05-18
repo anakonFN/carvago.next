@@ -5,46 +5,39 @@ export const vehicleAPI = z.object({
   title: z.string(),
   power: z.number(),
   features: z.array(
-    z.object({ id: z.string(), const_key: z.string(), name: z.string() }),
+    z.object({
+      id: z.string(),
+      name: z.string(),
+    }),
   ),
   fuel_type: z.object({
     id: z.string(),
-    const_key: z.string(),
     name: z.string(),
   }),
   transmission: z.object({
     id: z.string(),
-    const_key: z.string(),
     name: z.string(),
   }),
   drive: z.object({
     id: z.string(),
-    const_key: z.string(),
     name: z.string(),
   }),
   registration_date: z.string(),
   mileage: z.number(),
   location_country: z.object({
     id: z.string(),
-    const_key: z.string(),
     name: z.string(),
-    iso_code: z.string(),
   }),
   seller: z.object({
     id: z.string(),
     type: z.object({
       id: z.string(),
-      const_key: z.string(),
       name: z.string(),
     }),
     country: z.object({
       id: z.string(),
-      const_key: z.string(),
       name: z.string(),
-      iso_code: z.string(),
     }),
-    zip: z.string(),
-    email: z.string().nullable(),
     rating_average: z.number().nullable(),
     rating_count: z.number().nullable(),
     offers_count: z.number(),
@@ -54,8 +47,6 @@ export const vehicleAPI = z.object({
     z.object({
       id: z.number(),
       path: z.string(),
-      ordering: z.number(),
-      ordering_computed: z.number().nullable(),
     }),
   ),
   power_hp: z.number().nullable(),

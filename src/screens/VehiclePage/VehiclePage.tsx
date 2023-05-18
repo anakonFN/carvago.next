@@ -74,9 +74,9 @@ export function VehiclePage({ carId = '54022280' }: Props) {
   }
 
   const numbFmt = new Intl.NumberFormat('ru-RU')
-    .format(Math.trunc(car.uniform_price))
+    .format(Math.trunc(car.price))
   const numbFmtVAT = new Intl
-    .NumberFormat('ru-RU').format(Math.trunc(car.uniform_price))
+    .NumberFormat('ru-RU').format(Math.trunc(car.price))
 
   return (
       <CLayout>
@@ -330,7 +330,7 @@ export function VehiclePage({ carId = '54022280' }: Props) {
                               </div>
 
                               <div className="text-sm font-semibold">
-                                  {car.location_country.name}
+                                  {car.locationCountry.name}
                               </div>
                           </div>
                       </div>
@@ -360,7 +360,7 @@ export function VehiclePage({ carId = '54022280' }: Props) {
                               </div>
 
                               <div className="text-sm font-semibold">
-                                  {car.mileage}
+                                  {car.kmsDriven}
                               </div>
                           </div>
 
@@ -379,7 +379,7 @@ export function VehiclePage({ carId = '54022280' }: Props) {
                               </div>
 
                               <div className="text-sm font-semibold">
-                                  {car.registration_date}
+                                  {car.registrationDate}
                               </div>
                           </div>
 
@@ -428,7 +428,7 @@ export function VehiclePage({ carId = '54022280' }: Props) {
                                   kW
 
                                   (
-                                  {car.power_hp}
+                                  {car.powerHp}
 
                                   {' '}
                                   hp)
@@ -455,7 +455,7 @@ export function VehiclePage({ carId = '54022280' }: Props) {
                               </div>
 
                               <div className="text-sm font-semibold">
-                                  {car.fuel_type.name}
+                                  {car.fuelType.name}
                               </div>
                           </div>
 
@@ -478,7 +478,7 @@ export function VehiclePage({ carId = '54022280' }: Props) {
                               </div>
 
                               <div className="text-sm font-semibold">
-                                  {car.fuel_consumption_combined}
+                                  {car.fuelConsumptionCombined}
                                   l
                                   /100km
                               </div>
@@ -503,7 +503,7 @@ export function VehiclePage({ carId = '54022280' }: Props) {
                               </div>
 
                               <div className="text-sm font-semibold">
-                                  {car.drive.name}
+                                  {car.driveType.name}
                               </div>
                           </div>
                       </div>
