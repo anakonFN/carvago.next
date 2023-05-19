@@ -13,7 +13,8 @@ const nextConfig = {
         imports: [
           'react',
           {
-            clsx: ['clsx'],
+            'clsx': ['clsx'],
+            'tailwind-merge': ['twMerge'],
           },
         ],
         eslintrc: {

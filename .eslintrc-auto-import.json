@@ -6,6 +6,7 @@
     "lazy": true,
     "memo": true,
     "startTransition": true,
+    "twMerge": true,
     "useCallback": true,
     "useContext": true,
     "useDebugValue": true,
