@@ -21,9 +21,7 @@ export function HomePage() {
                       className="
                       relative z-10 block h-[50rem]
                       bg-[url('https://carvago.com/images/B2C-homepage/hero.webp')]
-                      bg-cover
-                      bg-center bg-no-repeat
-                      p-0 sm:h-[40rem]
+                      bg-cover bg-center bg-no-repeat p-0 sm:h-[40rem]
                       "
                   >
                       <div className="relative h-full">
@@ -37,13 +35,9 @@ export function HomePage() {
 
                           <div
                               className="
-                              absolute
-                              inset-x-0 bottom-0
-                              h-80 w-full
+                              absolute inset-x-0 bottom-0 h-80 w-full
                               bg-[linear-gradient(0deg,_rgb(31,_43,_89)_28%,_rgba(31,_43,_89,_0)_100%)]
-                              after:absolute
-                              after:bottom-0
-                              after:z-[8]
+                              after:absolute after:bottom-0 after:z-[8]
                               after:block after:h-[50px] after:w-full after:bg-white
                               after:content-[''] after:[clip-path:polygon(100%_0,_0%_100%,_100%_100%)]
                               "
