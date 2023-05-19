@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
+
 import { modelsFetcher, paramsFetcher, paramsKeys } from './query'
 
 export function useParams() {

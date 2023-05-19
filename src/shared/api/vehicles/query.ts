@@ -1,8 +1,9 @@
 import { z } from 'zod'
 
-import { type filterAPI, vehicleAPI } from './types'
 import { BASE_URL } from '../lib'
+
 import { normalizeVehicles } from './normalizers'
+import { type filterAPI, vehicleAPI } from './types'
 
 export const vehiclesKeys = {
   GetVehicles: (page: number, filters: Partial<filterAPI>, limit: number) => [

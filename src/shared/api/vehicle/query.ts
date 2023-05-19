@@ -1,6 +1,7 @@
+import { BASE_URL } from '../lib'
+
 import { vehicleAPI } from './types'
 import { normalizeVehicle } from './normalizers'
-import { BASE_URL } from '../lib'
 
 export const vehicleKeys = {
   GetVehicle: ['vehicle'],
