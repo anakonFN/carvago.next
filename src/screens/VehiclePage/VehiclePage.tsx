@@ -38,10 +38,10 @@ interface Props {
 }
 
 export function VehiclePage({ carId = '54022280' }: Props) {
-  const { data: car, isLoading } = useVehicle(carId)
+  const { data: car, isFetching } = useVehicle(carId)
   const [liked, setLiked] = useState(false)
 
-  if (isLoading) {
+  if (isFetching) {
     return (
         <CLayout>
             <Head>
@@ -62,12 +62,24 @@ export function VehiclePage({ carId = '54022280' }: Props) {
         <CLayout>
             <Head>
                 <title>
-                    Carvago | cars
+                    Carvago | car
                 </title>
             </Head>
 
-            <div className='my-48 text-center font-bold'>
-                NOT FOUND CAR
+            <div className='my-48 flex flex-col items-center gap-6'>
+                <div className='font-bold'>
+                    NOT FOUND CAR
+                </div>
+
+                <CButton
+                    size='sm'
+                    variant='primary'
+                >
+                    <Link href='/'>
+                        Go back to cars list page
+                    </Link>
+                </CButton>
+
             </div>
         </CLayout>
     )
