@@ -1,5 +1,6 @@
-import { VehiclePage } from '@/screens/VehiclePage'
 import { useRouter } from 'next/router'
+
+import { VehiclePage } from '@/screens/VehiclePage'
 
 export default function VehicleDetailsPage() {
   const { query } = useRouter()
