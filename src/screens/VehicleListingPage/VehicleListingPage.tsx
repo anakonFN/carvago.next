@@ -1,18 +1,19 @@
+import Head from 'next/head'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+
 import {
   AdjustmentsHorizontalIcon,
   ChevronLeftIcon,
   ChevronRightIcon,
 } from '@heroicons/react/24/outline'
 
-import Head from 'next/head'
-import Link from 'next/link'
-import { useRouter } from 'next/router'
-
 import { SearchForm } from '@/widget/SearchForm'
 import { VehicleCard } from '@/widget/VehicleCard'
 
 import { CLayout } from '@/shared/ui/CLayout'
 import { CRadioGroup } from '@/shared/ui/CRadioGroup'
+import { CButton } from '@/shared/ui/CButton'
 import { useVehicles } from '@/shared/api/vehicles'
 
 import { options } from './config'
@@ -165,24 +166,8 @@ export function VehicleListingPage() {
   if (selectedModel.key >= 1)
     params['model-family[]'] = selectedModel.key
 
-  const { data: cars, isLoading, isFetching }
+  const { data: cars, isFetching }
   = useVehicles(page, 10, params)
-
-  if (isLoading) {
-    return (
-        <CLayout>
-            <Head>
-                <title>
-                    Carvago | cars
-                </title>
-            </Head>
-
-            <div className='my-48 text-center font-bold'>
-                LOADING...
-            </div>
-        </CLayout>
-    )
-  }
 
   if (isFetching) {
     return (
@@ -209,8 +194,20 @@ export function VehicleListingPage() {
                 </title>
             </Head>
 
-            <div className='my-48 text-center font-bold'>
-                NOT FOUND CARS
+            <div className='my-48 flex flex-col items-center gap-6'>
+                <div className='font-bold'>
+                    NOT FOUND CARS
+                </div>
+
+                <CButton
+                    size='sm'
+                    variant='primary'
+                >
+                    <Link href='/'>
+                        Go back to home page
+                    </Link>
+                </CButton>
+
             </div>
         </CLayout>
     )
