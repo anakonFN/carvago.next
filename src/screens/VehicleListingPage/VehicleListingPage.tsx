@@ -235,9 +235,9 @@ export function VehicleListingPage() {
               >
                   <div
                       className="
-                        ml-3 inline-flex items-center
-                        rounded-md bg-blue-700 px-2 py-1
-                        "
+                      ml-3 inline-flex items-center
+                      rounded-md bg-blue-700 px-2 py-1
+                      "
                       onClick={openSearchForm}
                   >
                       <AdjustmentsHorizontalIcon
@@ -253,10 +253,10 @@ export function VehicleListingPage() {
 
               <div
                   className={
-                `fixed right-0 top-0 z-30 
-                ${showSearchForm ? 'translate-x-0' : 'translate-x-full'}
-                transition-all duration-300 ease-in`
-        }
+                  `fixed right-0 top-0 z-30 
+                  ${showSearchForm ? 'translate-x-0' : 'translate-x-full'}
+                  transition-all duration-300 ease-in`
+                  }
               >
                   {showSearchForm
                     ? <SearchForm
@@ -310,8 +310,8 @@ export function VehicleListingPage() {
                   <div className="bg-slate-100 py-5">
                       <div
                           className="
-                            mx-auto flex justify-center md:max-w-[1222px]
-                            "
+                          mx-auto flex justify-center md:max-w-[1222px]
+                          "
                       >
 
                           <div className="hidden min-[1300px]:block">
@@ -360,9 +360,9 @@ export function VehicleListingPage() {
                           <div className="px-1 md:pr-0 lg:pl-8">
                               <div
                                   className="
-                                    mb-8 flex items-end
-                                    gap-5 text-slate-700
-                                    "
+                                  mb-8 flex items-end
+                                  gap-5 text-slate-700
+                                  "
                               >
                                   <div className="text-3xl font-extrabold">
                                       Verified cars
@@ -371,8 +371,8 @@ export function VehicleListingPage() {
 
                               <div
                                   className="
-                                    flex items-center justify-between
-                                    "
+                                  flex items-center justify-between
+                                  "
                               >
                                   <div className="my-5">
                                       <CRadioGroup
@@ -386,11 +386,11 @@ export function VehicleListingPage() {
 
                               <div
                                   className="
-                                    flex flex-col gap-3 px-2
-                                    sm:grid sm:grid-cols-2
-                                    sd:flex-row sd:gap-4
-                                    md:flex md:flex-col md:px-0
-                                    "
+                                  flex flex-col gap-3 px-2
+                                  sm:grid sm:grid-cols-2
+                                  sd:flex-row sd:gap-4
+                                  md:flex md:flex-col md:px-0
+                                  "
                               >
                                   {cars.map((car) => {
                                     return (
@@ -409,8 +409,8 @@ export function VehicleListingPage() {
 
                               <div
                                   className="
-                                   mt-8 flex items-center justify-between
-                                   "
+                                  mt-8 flex items-center justify-between
+                                  "
                               >
                                   <button
                                       className="
