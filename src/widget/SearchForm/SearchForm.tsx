@@ -148,14 +148,14 @@ export function SearchForm({
               )
             : null}
 
-          <div className={clsx(
+          <div className={twMerge(
             isMobile && ' h-screen overflow-y-auto overflow-x-hidden',
             'relative w-72 bg-white p-6',
           )}
           >
 
               <CButton
-                  classes="text-indigo-600 gap-1"
+                  className="gap-1 text-indigo-600"
                   variant="link"
               >
                   <ArrowUturnLeftIcon className="h-4 w-4" />
@@ -373,7 +373,7 @@ export function SearchForm({
 
                   <div>
                       <CButton
-                          classes='underline-offset-8'
+                          className='underline-offset-8'
                           variant="underline"
                       >
                           <div
@@ -394,8 +394,8 @@ export function SearchForm({
                   />
 
                   <CButton
-                      classes="
-                      py-3 rounded-md w-full flex justify-center
+                      className="
+                      flex w-full justify-center rounded-md py-3
                       hover:shadow-md hover:shadow-blue-700/10
                       "
                       variant="border"

@@ -41,7 +41,7 @@ export function CAutocomplete<T extends Option>({
       >
           <div className="relative mt-1">
               <Combobox.Input
-                  className={clsx(
+                  className={twMerge(
                     [
                       'w-full rounded-[4px] border border-slate-400',
                       'py-2.5 pl-3 pr-0 text-sm',
@@ -60,7 +60,7 @@ export function CAutocomplete<T extends Option>({
               />
 
               <Combobox.Button
-                  className={clsx(
+                  className={twMerge(
                     'absolute inset-y-0 right-0 flex items-center pr-2',
                     'w-full justify-end',
 

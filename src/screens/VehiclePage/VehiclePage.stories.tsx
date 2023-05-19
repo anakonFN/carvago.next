@@ -11,6 +11,6 @@ export default meta
 
 export function Default() {
   return (
-      <VehiclePage />
+      <VehiclePage carId='55789590' />
   )
 }

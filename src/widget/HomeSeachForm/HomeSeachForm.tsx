@@ -102,9 +102,9 @@ export function HomeSearchForm() {
                       "
                   >
                       <CButton
-                          classes="
-                          text-base font-bold flex
-                          items-center underline-offset-4
+                          className="
+                          flex items-center text-base
+                          font-bold underline-offset-4
                           "
                           variant="underline"
                       >
@@ -145,8 +145,8 @@ export function HomeSearchForm() {
               <Stars />
 
               <CButton
-                  classes="
-                  text-sm text-slate-50 font-bold
+                  className="
+                  text-sm font-bold
                   text-white underline-offset-4
                   "
                   variant="underline"

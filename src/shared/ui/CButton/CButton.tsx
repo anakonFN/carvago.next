@@ -6,17 +6,17 @@ export interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children?: React.ReactNode
   variant?: ButtonVariant
   size?: ButtonSize
-  classes?: string
+  className?: string
 }
 
 export const CButton = React.forwardRef<HTMLButtonElement, Props>((
-  { children, variant, size, classes, ...props },
-  ref,
+  { children, variant, className, size, ...props }, ref,
 ) => {
   return (
       <button
-          className={clsx(
+          className={twMerge(
             'flex items-center font-sans',
+
             [
               size === 'square' && 'px-2',
               size === 'sm' && 'px-4',
@@ -55,7 +55,7 @@ export const CButton = React.forwardRef<HTMLButtonElement, Props>((
                 'border border-indigo-600',
               ],
             ],
-            classes,
+            className,
           )}
           ref={ref}
           {...props}

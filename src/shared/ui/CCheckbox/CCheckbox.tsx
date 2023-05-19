@@ -7,7 +7,7 @@ export function CCheckbox({ withOutline, children, ...props }: Props) {
   return (
       <div className="flex items-center gap-4">
           <input
-              className={clsx(
+              className={twMerge(
                 'h-5 w-5 cursor-pointer rounded-md border-blue-800',
                 'checked:ring-2 checked:ring-blue-300 checked:ring-offset-0',
                 'focus:ring-blue-300 focus:ring-offset-0',

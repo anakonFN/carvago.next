@@ -1,3 +1,7 @@
+import Image from 'next/image'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+
 import {
   AdjustmentsHorizontalIcon,
   Bars3Icon,
@@ -16,12 +20,12 @@ import carvagoLogo from '../../assets/carvago-logo.svg'
 
 import british from './assets/british.png'
 import czech from './assets/czech.webp'
-import Image from 'next/image'
-import Link from 'next/link'
 
 const serviceButtons = ['CarAudit \u2122', 'Delivery', 'Financing', 'Warranty']
 
 export function CHeader() {
+  const router = useRouter()
+
   const [showNavbar, setShowNavbar] = useState(false)
   const [showMore, setShowMore] = useState(false)
   const switchNavbar = () => setShowNavbar(!showNavbar)
@@ -52,13 +56,13 @@ export function CHeader() {
                         <li className="px-10 pb-6">
 
                             <Link href="/cars">
-                                <button
+                                <CButton
                                     onClick={() => {
                                       location.reload()
                                     }}
                                 >
                                     Buy
-                                </button>
+                                </CButton>
                             </Link>
 
                         </li>
@@ -184,6 +188,12 @@ export function CHeader() {
 
                       <div className="hidden gap-3 lg:flex">
                           <CButton
+                              className={twMerge(
+                                router.pathname === '/cars'
+                                 && ['underline',
+                                   'underline-offset-[27px] decoration-[3px]',
+                                 ],
+                              )}
                               variant="routerLink"
                           >
                               <Link href="/cars">
@@ -201,7 +211,7 @@ export function CHeader() {
 
                           <CHoverMenu button={({ open, delayClose }) => (
                               <CButton
-                                  classes="hover:no-underline relative"
+                                  className="relative hover:no-underline"
                                   onMouseEnter={open}
                                   onMouseLeave={delayClose}
                                   variant="underline"
@@ -231,7 +241,7 @@ export function CHeader() {
                                             return (
                                                 <li key={service}>
                                                     <CButton
-                                                        classes="
+                                                        className="
                                                         w-full justify-center
                                                         "
                                                         onClick={close}
@@ -287,7 +297,7 @@ export function CHeader() {
                                                   "
                                               >
                                                   <CButton
-                                                      classes="mb-6"
+                                                      className="mb-6"
                                                       size="lg"
                                                       variant="primary"
                                                   >
@@ -305,10 +315,10 @@ export function CHeader() {
                                                       Don&apos;t have
                                                       an account?
                                                       <CButton
-                                                          classes="
+                                                          className="
                                                           font-semibold
-                                                        hover:underline-offset-8
-                                                          decoration-1"
+                                                          decoration-1
+                                                      hover:underline-offset-8"
                                                           variant="underline"
                                                       >
                                                           Register
@@ -373,7 +383,7 @@ export function CHeader() {
                                               "
                                           >
                                               <CButton
-                                                  classes="mb-6"
+                                                  className="mb-6"
                                                   size="lg"
                                                   variant="primary"
                                               >
@@ -388,10 +398,10 @@ export function CHeader() {
                                               >
                                                   Don&apos;t have an account?
                                                   <CButton
-                                                      classes="
+                                                      className="
                                                       font-semibold
-                                                      hover:underline-offset-8
-                                                      decoration-1"
+                                                      decoration-1
+                                                      hover:underline-offset-8"
                                                       variant="underline"
                                                   >
                                                       Register

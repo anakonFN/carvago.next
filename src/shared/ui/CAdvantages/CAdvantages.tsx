@@ -1,5 +1,6 @@
-import { PlusCircleIcon } from '@heroicons/react/24/solid'
 import Image from 'next/image'
+
+import { PlusCircleIcon } from '@heroicons/react/24/solid'
 
 import { advantages } from './config'
 
@@ -9,8 +10,7 @@ export function CAdvantages({ ...props }: Props) {
   return (
       <ul
           className="
-          relative z-[100] flex w-full
-          flex-col md:w-auto md:flex-row
+          relative z-[100] flex w-full flex-col md:w-auto md:flex-row
           "
           {...props}
       >
@@ -18,7 +18,7 @@ export function CAdvantages({ ...props }: Props) {
           {advantages.map((advantage) => {
             return (
                 <li
-                    className={clsx(
+                    className={twMerge(
                       advantage.position === 'left'
                       && 'rounded-t-lg md:rounded-l-xl md:rounded-r-none',
                       advantage.position === 'center'

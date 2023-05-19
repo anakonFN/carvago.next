@@ -39,7 +39,7 @@ export function CCheckboxGroup({
                     />
 
                     <label
-                        className={clsx(
+                        className={twMerge(
                           [
                             'inline-block min-w-[6.4rem]',
                             'cursor-pointer',
@@ -56,7 +56,7 @@ export function CCheckboxGroup({
                     >
                         <div
                             className={
-                              clsx(
+                              twMerge(
                                 [
                                   'w-full select-none font-semibold',
                                   'text-center text-sm text-indigo-900/50',

@@ -1,4 +1,5 @@
 import type React from 'react'
+
 import { CHeader } from '../CHeader'
 import { CFooter } from '../CFooter'
 

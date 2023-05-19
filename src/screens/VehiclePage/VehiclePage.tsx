@@ -107,7 +107,7 @@ export function VehiclePage({ carId = '54022280' }: Props) {
               >
                   <Link href="/cars">
                       <CButton
-                          classes="gap-2 underline-offset-8"
+                          className="gap-2 underline-offset-8"
                           variant="underline"
                       >
                           <ChevronLeftIcon className="h-5 w-5" />
@@ -522,7 +522,7 @@ export function VehiclePage({ carId = '54022280' }: Props) {
 
                       <div className="flex justify-between">
                           <button
-                              className={clsx(
+                              className={twMerge(
                                 liked
                                   ? 'border-indigo-700'
                                   : 'border-indigo-300',
@@ -546,7 +546,7 @@ export function VehiclePage({ carId = '54022280' }: Props) {
                           </button>
 
                           <CButton
-                              classes="sm:px-32 px-24"
+                              className="px-24 sm:px-32"
                               size="lg"
                               variant="warning"
                           >

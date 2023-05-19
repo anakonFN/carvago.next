@@ -66,28 +66,28 @@ export function CFooter() {
                           </h5>
 
                           <CButton
-                              classes="hover:bg-slate-50"
+                              className="hover:bg-slate-50"
                               variant="light"
                           >
                               Buy
                           </CButton>
 
                           <CButton
-                              classes="hover:bg-slate-50"
+                              className="hover:bg-slate-50"
                               variant="light"
                           >
                               How it works
                           </CButton>
 
                           <CButton
-                              classes="hover:bg-slate-50"
+                              className="hover:bg-slate-50"
                               variant="light"
                           >
                               Reviews
                           </CButton>
 
                           <CButton
-                              classes="hover:bg-slate-50"
+                              className="hover:bg-slate-50"
                               variant="light"
                           >
                               Site map
@@ -100,28 +100,28 @@ export function CFooter() {
                           </h5>
 
                           <CButton
-                              classes="hover:bg-slate-50"
+                              className="hover:bg-slate-50"
                               variant="light"
                           >
                               CarAudit&#8482;
                           </CButton>
 
                           <CButton
-                              classes="hover:bg-slate-50"
+                              className="hover:bg-slate-50"
                               variant="light"
                           >
                               Delivery
                           </CButton>
 
                           <CButton
-                              classes="hover:bg-slate-50"
+                              className="hover:bg-slate-50"
                               variant="light"
                           >
                               Financing
                           </CButton>
 
                           <CButton
-                              classes="hover:bg-slate-50"
+                              className="hover:bg-slate-50"
                               variant="light"
                           >
                               Warranty
@@ -136,28 +136,28 @@ export function CFooter() {
                           </h5>
 
                           <CButton
-                              classes="hover:bg-slate-50"
+                              className="hover:bg-slate-50"
                               variant="light"
                           >
                               About us
                           </CButton>
 
                           <CButton
-                              classes="hover:bg-slate-50"
+                              className="hover:bg-slate-50"
                               variant="light"
                           >
                               Contact
                           </CButton>
 
                           <CButton
-                              classes="hover:bg-slate-50"
+                              className="hover:bg-slate-50"
                               variant="light"
                           >
                               Reviews
                           </CButton>
 
                           <CButton
-                              classes="hover:bg-slate-50"
+                              className="hover:bg-slate-50"
                               variant="light"
                           >
                               Site map

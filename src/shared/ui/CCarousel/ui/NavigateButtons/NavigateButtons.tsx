@@ -13,7 +13,7 @@ export function NavigateButtons({ variant }: Props) {
   return (
       <>
           <CButton
-              className={clsx(
+              className={twMerge(
                 variant === 'big' ? 'top-1/3 py-20' : 'top-12 py-8',
                 [
                   'absolute left-0 z-20 transition-all duration-300',
@@ -28,7 +28,7 @@ export function NavigateButtons({ variant }: Props) {
           </CButton>
 
           <CButton
-              className={clsx(
+              className={twMerge(
                 variant === 'big' ? 'top-1/3 py-20' : 'top-12 py-8',
                 [
                   'absolute right-0 z-20 transition-all duration-300',

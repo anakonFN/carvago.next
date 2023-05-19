@@ -27,7 +27,7 @@ export function CRadioGroup({ options, currentValue, ...props }: Props) {
                     />
 
                     <label
-                        className={clsx(
+                        className={twMerge(
                           'border-b py-2 text-center text-xs',
                           'cursor-pointer px-4 sd:text-base',
                           option.sortName === currentValue?.sortName

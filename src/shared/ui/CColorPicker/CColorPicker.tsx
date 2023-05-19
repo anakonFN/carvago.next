@@ -30,7 +30,7 @@ export function CColorPicker({ colors, values, ...props }: Props) {
                 >
                     <input
                         checked={values.includes(color.key)}
-                        className={clsx(
+                        className={twMerge(
                           'cursor-pointer rounded-full',
                           'border border-white/0',
                           'p-2 ring-offset-2 focus:ring-2',

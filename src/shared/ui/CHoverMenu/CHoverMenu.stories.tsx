@@ -17,7 +17,7 @@ export function Default() {
   return (
       <CHoverMenu button={({ open, delayClose }) => (
           <CButton
-              classes='hover:no-underline relative'
+              className='hover:no-underline relative'
               onMouseEnter={open}
               onMouseLeave={delayClose}
               variant='underline'

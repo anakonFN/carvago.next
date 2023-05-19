@@ -29,7 +29,7 @@ export function CSelect<T extends Option>({
           {...props}
           value={itemsList}
       >
-          <Listbox.Button className={clsx(
+          <Listbox.Button className={twMerge(
             'flex w-52 items-center justify-between',
             'border border-blue-800 p-2 text-sm',
             [
@@ -63,7 +63,7 @@ export function CSelect<T extends Option>({
                       key={item}
                       value={item}
                   >
-                      <span className={clsx(
+                      <span className={twMerge(
                         'block truncate',
                         [item === value ? 'font-bold' : 'font-normal'],
                       )}
