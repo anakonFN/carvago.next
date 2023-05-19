@@ -23,7 +23,6 @@ const config: StorybookConfig = {
         imports: [
           'react',
           {
-            'clsx': ['clsx'],
             'tailwind-merge': ['twMerge'],
           },
         ],

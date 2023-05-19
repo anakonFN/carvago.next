@@ -1,6 +1,5 @@
 {
   "globals": {
-    "clsx": true,
     "createRef": true,
     "forwardRef": true,
     "lazy": true,
