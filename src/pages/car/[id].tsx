@@ -4,18 +4,15 @@ import { useRouter } from 'next/router'
 export default function VehicleDetailsPage() {
   const { query } = useRouter()
 
-  const id = query.id
-
   return (
       <div>
           {
-           id
-             ? <VehiclePage
-              // @ts-expect-error
-                     carId={id}
-               />
-             : null
-                 }
+          typeof query.id === 'string'
+            ? <VehiclePage
+                    carId={query.id}
+              />
+            : null
+           }
       </div>
   )
 }
